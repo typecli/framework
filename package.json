@@ -1,0 +1,56 @@
+{
+  "name": "@typecli/framework",
+  "version": "0.1.0",
+  "description": "A TypeScript library for building command-line interface applications in a strong-typing way.",
+  "keywords": [
+    "args",
+    "argument",
+    "argv",
+    "cli",
+    "command",
+    "option",
+    "parser"
+  ],
+  "repository": "typecli/framework",
+  "license": "MIT",
+  "author": "mosop",
+  "files": [
+    "dist"
+  ],
+  "main": "dist/index.js",
+  "types": "dist/index.d.js",
+  "scripts": {
+    "dist": "npm-run-all dist:clean dist:build",
+    "dist:build": "tsc -p tsconfig.dist.json",
+    "dist:clean": "rm -rf dist",
+    "doc": "typedoc --mode file --excludeNotExported --out docs/api src",
+    "lint": "tslint -p . -t verbose && tslint -p . -c node_modules/@myowncake/config-tslint/dist/tslint.no-unused-variable.json -t verbose",
+    "test": "npm run testx -- 'spec/**/*.spec.ts'",
+    "posttest": "npm run lint",
+    "testx": "ts-node node_modules/jasmine/bin/jasmine"
+  },
+  "dependencies": {
+    "@types/pluralize": "0.0.28",
+    "@typescript-plus/builtin-class-decorator": "^0.2.0",
+    "@typescript-plus/fast-memoize-decorator": "^0.1.0",
+    "@typescript-plus/mixin-decorator": "^0.1.0",
+    "case": "^1.5.5",
+    "events": "^3.0.0",
+    "pluralize": "^7.0.0",
+    "reflect-metadata": "^0.1.12"
+  },
+  "devDependencies": {
+    "@myowncake/config-tslint": "^0.3.0",
+    "@myowncake/config-typescript": "^0.1.0",
+    "@types/jasmine": "^2.8.7",
+    "@types/node": "^8.10.17",
+    "@typescript-plus/should-throw": "^0.1.0",
+    "@typescript-plus/stream-capture": "^0.2.0",
+    "jasmine": "^2.99.0",
+    "npm-run-all": "^4.1.3",
+    "ts-node": "^6.0.5",
+    "tslint": "^5.10.0",
+    "typedoc": "^0.11.1",
+    "typescript": "^2.8.4"
+  }
+}
