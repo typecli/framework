@@ -22,8 +22,8 @@ class HelloGoodbye {
   }
 }
 
-runSync(new HelloGoodbye(), ['world']);
-runSync(new HelloGoodbye(), ['--bye', 'world']);
+runSync(HelloGoodbye, ['world']);
+runSync(HelloGoodbye, ['--bye', 'world']);
 ```
 
 Output:
