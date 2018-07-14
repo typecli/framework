@@ -66,9 +66,50 @@ var MissingAttributeError = (function (_super) {
         _this.model = model;
         return _this;
     }
+    Object.defineProperty(MissingAttributeError.prototype, "message", {
+        get: function () {
+            return "Missing :";
+        },
+        enumerable: true,
+        configurable: true
+    });
     return MissingAttributeError;
 }(ParserError));
 exports.MissingAttributeError = MissingAttributeError;
+var MissingArgumentError = (function (_super) {
+    __extends(MissingArgumentError, _super);
+    function MissingArgumentError(parser, model) {
+        var _this = _super.call(this, parser, model) || this;
+        _this.model = model;
+        return _this;
+    }
+    Object.defineProperty(MissingArgumentError.prototype, "message", {
+        get: function () {
+            return "Missing argument: " + this.model.variableName;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    return MissingArgumentError;
+}(MissingAttributeError));
+exports.MissingArgumentError = MissingArgumentError;
+var MissingOptionError = (function (_super) {
+    __extends(MissingOptionError, _super);
+    function MissingOptionError(parser, model) {
+        var _this = _super.call(this, parser, model) || this;
+        _this.model = model;
+        return _this;
+    }
+    Object.defineProperty(MissingOptionError.prototype, "message", {
+        get: function () {
+            return "Missing option: " + this.model.optionNames[0];
+        },
+        enumerable: true,
+        configurable: true
+    });
+    return MissingOptionError;
+}(MissingAttributeError));
+exports.MissingOptionError = MissingOptionError;
 var UndefinedAttributeValueError = (function (_super) {
     __extends(UndefinedAttributeValueError, _super);
     function UndefinedAttributeValueError(parser, model, message) {

@@ -1,13 +1,19 @@
 import { AttributeModel_parsedValueIsMissing } from './classes/attribute_model/interfaces';
-import { AttributeModel } from './classes/AttributeModel';
+import { ArgumentModelType, OptionModelType } from './classes/AttributeModel';
 import { Parser } from './classes/Parser';
-import { MissingAttributeError } from './errors';
+import { MissingArgumentError, MissingOptionError } from './errors';
 
-export const validateAttributeRequired = (
+export function validateArgumentRequired(
   parser: Parser,
-  model: AttributeModel & AttributeModel_parsedValueIsMissing
-) => {
+  model: ArgumentModelType & AttributeModel_parsedValueIsMissing
+) {
   if (model.parsedValueIsMissing(parser)) {
-    throw new MissingAttributeError(parser, model);
+    throw new MissingArgumentError(parser, model);
   }
-};
+}
+
+export function validateOptionRequired(parser: Parser, model: OptionModelType & AttributeModel_parsedValueIsMissing) {
+  if (model.parsedValueIsMissing(parser)) {
+    throw new MissingOptionError(parser, model);
+  }
+}

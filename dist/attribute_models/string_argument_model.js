@@ -25,7 +25,7 @@ var validators_1 = require("../validators");
 var STRING_ARGUMENT_PARSER_EVENTS = new EventEmitter_1.AttributeParserEventEmitter();
 STRING_ARGUMENT_PARSER_EVENTS.on(events_1.ATTRIBUTE_PARSER_EVENT.VALIDATE, function (event) {
     if (event.model.options.required) {
-        validators_1.validateAttributeRequired(event.parser, event.model);
+        validators_1.validateArgumentRequired(event.parser, event.model);
     }
 });
 var StringArgumentModel = (function (_super) {

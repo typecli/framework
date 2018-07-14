@@ -1,6 +1,6 @@
 // tslint:disable-next-line:no-implicit-dependencies
 import { shouldThrow } from '@typescript-plus/should-throw';
-import { MissingAttributeError, Option, parse } from '../../../src';
+import { MissingAttributeError, MissingOptionError, Option, parse } from '../../../src';
 
 class Profile {
   @Option({ required: true })
@@ -10,7 +10,13 @@ class Profile {
 it('Book - Builtin Validators - Required Options', async () => {
   let error;
   try {
-    await shouldThrow(MissingAttributeError, async () => parse(new Profile(), []));
+    await shouldThrow(
+      MissingOptionError,
+      async () => parse(new Profile(), []),
+      (e: MissingAttributeError<any>) => {
+        expect(e.message).toEqual('Missing option: --birthday');
+      }
+    );
   } catch (err) {
     error = err;
   }

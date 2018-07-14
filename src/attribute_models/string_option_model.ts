@@ -8,7 +8,7 @@ import {
 import { AttributeParserEventEmitter } from '../classes/EventEmitter';
 import { Parser } from '../classes/Parser';
 import { ATTRIBUTE_PARSER_EVENT } from '../events';
-import { validateAttributeRequired } from '../validators';
+import { validateOptionRequired } from '../validators';
 
 export interface StringOptionModelOptions
   extends AttributeModelOptions_default,
@@ -19,7 +19,7 @@ export interface StringOptionModelOptions
 const STRING_OPTION_PARSER_EVENTS = new AttributeParserEventEmitter<StringOptionModel>();
 STRING_OPTION_PARSER_EVENTS.on(ATTRIBUTE_PARSER_EVENT.VALIDATE, event => {
   if (event.model.options.required) {
-    validateAttributeRequired(event.parser, event.model);
+    validateOptionRequired(event.parser, event.model);
   }
 });
 

@@ -1,4 +1,5 @@
 import { AttributeModel_parsedValueIsMissing } from './classes/attribute_model/interfaces';
-import { AttributeModel } from './classes/AttributeModel';
+import { ArgumentModelType, OptionModelType } from './classes/AttributeModel';
 import { Parser } from './classes/Parser';
-export declare const validateAttributeRequired: (parser: Parser, model: AttributeModel & AttributeModel_parsedValueIsMissing) => void;
+export declare function validateArgumentRequired(parser: Parser, model: ArgumentModelType & AttributeModel_parsedValueIsMissing): void;
+export declare function validateOptionRequired(parser: Parser, model: OptionModelType & AttributeModel_parsedValueIsMissing): void;

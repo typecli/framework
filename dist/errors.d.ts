@@ -14,9 +14,20 @@ export declare abstract class AttributeParserError<M extends AttributeModel> ext
     attributeModel: M;
     constructor(parser: Parser, attributeModel: M, message?: string);
 }
-export declare class MissingAttributeError<M extends AttributeModel> extends ParserError {
+export declare abstract class MissingAttributeError<M extends AttributeModel> extends ParserError {
     model: M;
     constructor(parser: Parser, model: M);
+    readonly message: string;
+}
+export declare class MissingArgumentError<M extends ArgumentModelType> extends MissingAttributeError<M> {
+    model: M;
+    constructor(parser: Parser, model: M);
+    readonly message: string;
+}
+export declare class MissingOptionError<M extends OptionModelType> extends MissingAttributeError<M> {
+    model: M;
+    constructor(parser: Parser, model: M);
+    readonly message: string;
 }
 export declare abstract class UndefinedAttributeValueError<M extends AttributeModel> extends AttributeParserError<M> {
     constructor(parser: Parser, model: M, message?: string);

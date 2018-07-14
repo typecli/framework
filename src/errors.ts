@@ -26,9 +26,33 @@ export abstract class AttributeParserError<M extends AttributeModel> extends Par
   }
 }
 
-export class MissingAttributeError<M extends AttributeModel> extends ParserError {
+export abstract class MissingAttributeError<M extends AttributeModel> extends ParserError {
   constructor(parser: Parser, public model: M) {
     super(parser);
+  }
+
+  get message() {
+    return `Missing :`;
+  }
+}
+
+export class MissingArgumentError<M extends ArgumentModelType> extends MissingAttributeError<M> {
+  constructor(parser: Parser, public model: M) {
+    super(parser, model);
+  }
+
+  get message() {
+    return `Missing argument: ${this.model.variableName}`;
+  }
+}
+
+export class MissingOptionError<M extends OptionModelType> extends MissingAttributeError<M> {
+  constructor(parser: Parser, public model: M) {
+    super(parser, model);
+  }
+
+  get message() {
+    return `Missing option: ${this.model.optionNames[0]}`;
   }
 }
 
