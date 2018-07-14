@@ -2,7 +2,7 @@
 
 A TypeScript library for building command-line applications in a type-strong way.
 
-[![CircleCI](https://circleci.com/gh/typecli/framework.svg?style=svg)](https://circleci.com/gh/typecli/framework)
+[![CircleCI](https://circleci.com/gh/typecli/framework.svg?style=shield)](https://circleci.com/gh/typecli/framework)
 
 
 ```ts
