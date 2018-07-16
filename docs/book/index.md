@@ -14,7 +14,7 @@
 
 * [Describing Subcommands](./describing_subcommands.md)
 * [Manipulating Option Names](./manipulating_option_names.md)
-* WIP: Running Commands Asynchronously
+* [Running Commands Asynchronously](./running_commands_asynchronously.md)
 * WIP: Automatic Type Detection
 * WIP: How TypeCLI Distinguishes Between Arguments and Options
 * WIP: Describing Custom Validators

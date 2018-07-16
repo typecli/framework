@@ -1,13 +1,10 @@
-import { RunSpace, RunSpaceOptions } from '../classes/RunSpace';
+import { RunSpaceOptions } from '../classes/RunSpace';
 import { ContextClassType } from '../types';
-import { WORLD } from '../world';
+import { run } from './run';
 
 export function runSync(contextClass: ContextClassType, args?: string[], spaceOptions?: RunSpaceOptions) {
-  const space = new RunSpace(spaceOptions ? spaceOptions : {});
-  WORLD.runSpaces.push(space);
-  try {
-    space.runSync(contextClass, args ? args : []);
-  } finally {
-    WORLD.runSpaces.pop();
-  }
+  // tslint:disable-next-line:no-floating-promises
+  (async () => {
+    await run(contextClass, args, spaceOptions);
+  })();
 }
