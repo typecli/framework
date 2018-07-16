@@ -36,20 +36,12 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var RunSpace_1 = require("../classes/RunSpace");
-var world_1 = require("../world");
 function run(contextClass, args, spaceOptions) {
     return __awaiter(this, void 0, void 0, function () {
         var space;
         return __generator(this, function (_a) {
             space = new RunSpace_1.RunSpace(spaceOptions ? spaceOptions : {});
-            world_1.WORLD.runSpaces.push(space);
-            try {
-                space.run(contextClass, args ? args : []);
-            }
-            finally {
-                world_1.WORLD.runSpaces.pop();
-            }
-            return [2];
+            return [2, space.run(contextClass, args ? args : [])];
         });
     });
 }

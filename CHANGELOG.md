@@ -15,6 +15,12 @@ Based on [Keep a Changelog].
 
 ### [Edge (HEAD)][edge]
 
+### [0.1.2]
+
+##### Added
+
+* Asynchronous runner.
+
 ### [0.1.1]
 
 ##### Added
@@ -23,5 +29,6 @@ Based on [Keep a Changelog].
 
 [Keep a Changelog]: http://keepachangelog.com/en/1.0.0/
 [Semantic Versioning Caret]: https://github.com/myowncake/semver-caret
-[edge]: https://github.com/typecli/framework/compare/v0.1.1...HEAD
+[edge]: https://github.com/typecli/framework/compare/v0.1.2...HEAD
+[0.1.2]: https://github.com/typecli/framework/compare/v0.1.1...v0.1.2
 [0.1.1]: https://github.com/typecli/framework/compare/v0.1.0...v0.1.1
