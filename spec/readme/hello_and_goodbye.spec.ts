@@ -1,6 +1,6 @@
 // tslint:disable-next-line:no-implicit-dependencies
 import { capture } from '@typescript-plus/stream-capture';
-import { Argument, Option, runSync, RunSync } from '../../src';
+import { Argument, Option, Run, runSync } from '../../src';
 
 // tslint:disable:max-classes-per-file
 // tslint:disable:member-ordering
@@ -14,7 +14,7 @@ class HelloGoodbye {
     return this.bye ? 'Goodbye' : 'Hello';
   }
 
-  @RunSync()
+  @Run()
   run() {
     console.log('%s, %s!', this.greeting, this.to);
   }

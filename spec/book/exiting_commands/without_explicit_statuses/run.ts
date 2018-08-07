@@ -1,7 +1,7 @@
-import { exit, runSync, RunSync } from '../../../../src';
+import { exit, Run, runSync } from '../../../../src';
 
 class Command {
-  @RunSync()
+  @Run()
   run() {
     exit();
   }

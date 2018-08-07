@@ -1,4 +1,5 @@
 import { Exit } from '../errors/Exit';
+import { NotSynchronousRunnerMethodError } from '../errors/NotSynchronousRunnerMethodError';
 import { parseSync } from '../functions/parseSync';
 import { ContextClassType } from '../types';
 import { WORLD } from '../world';
@@ -63,9 +64,13 @@ export class RunSpace {
   private _runSync(contextSpec: ContextSpec, args: string[]): void {
     const context = contextSpec.createInstance();
     const parser = parseSync(context, args);
-    const runSyncMethod = contextSpec.runSyncMethod;
-    if (runSyncMethod) {
-      context[runSyncMethod.key]();
+    const runMethod = contextSpec.runMethod;
+    if (runMethod) {
+      const runResult = context[runMethod.key]();
+      if (runResult !== undefined && typeof runResult.then === 'function') {
+        throw new NotSynchronousRunnerMethodError();
+      }
+      return;
     }
     const subcontextSpec = parser.subcontextSpec;
     if (subcontextSpec) {
