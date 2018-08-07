@@ -4,6 +4,7 @@ export * from './decorators/Help';
 export * from './decorators/Option';
 export * from './decorators/Options';
 export * from './decorators/Run';
+export * from './decorators/RunSync';
 export * from './decorators/ShowHelp';
 export * from './decorators/Sub';
 export * from './decorators/Unparsed';

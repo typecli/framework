@@ -9,6 +9,7 @@ __export(require("./decorators/Help"));
 __export(require("./decorators/Option"));
 __export(require("./decorators/Options"));
 __export(require("./decorators/Run"));
+__export(require("./decorators/RunSync"));
 __export(require("./decorators/ShowHelp"));
 __export(require("./decorators/Sub"));
 __export(require("./decorators/Unparsed"));
