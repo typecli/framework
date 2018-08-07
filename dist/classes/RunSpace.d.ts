@@ -5,7 +5,9 @@ export declare class RunSpace {
     readonly throwsOnExit: boolean;
     exit(status?: number): void;
     run(contextClass: ContextClassType, args: string[]): Promise<void>;
+    runSync(contextClass: ContextClassType, args: string[]): void;
     private _run(contextSpec, args);
+    private _runSync(contextSpec, args);
 }
 export interface RunSpaceOptions {
     throwOnExit?: boolean;

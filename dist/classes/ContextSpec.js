@@ -67,6 +67,9 @@ var ContextSpec = (function () {
     ContextSpec.prototype.setRunMethod = function (method) {
         this.runMethod = method;
     };
+    ContextSpec.prototype.setRunSyncMethod = function (method) {
+        this.runSyncMethod = method;
+    };
     ContextSpec.prototype.setTerminatorModel = function (model) {
         this.attributeModels.set(model.key, model);
         this.terminator = model;

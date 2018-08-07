@@ -66,12 +66,23 @@ var RunSpace = (function () {
                         .then(function () {
                         world_1.WORLD.runSpaces.pop();
                     })
-                        .catch(function (e) {
+                        .catch(function (err) {
                         world_1.WORLD.runSpaces.pop();
-                        throw e;
+                        throw err;
                     })];
             });
         });
+    };
+    RunSpace.prototype.runSync = function (contextClass, args) {
+        world_1.WORLD.runSpaces.push(this);
+        try {
+            this._runSync(world_1.WORLD.getContextSpecOfClass(contextClass), args);
+            world_1.WORLD.runSpaces.pop();
+        }
+        catch (err) {
+            world_1.WORLD.runSpaces.pop();
+            throw err;
+        }
     };
     RunSpace.prototype._run = function (contextSpec, args) {
         return __awaiter(this, void 0, void 0, function () {
@@ -94,6 +105,18 @@ var RunSpace = (function () {
                 return [2, Promise.resolve()];
             });
         });
+    };
+    RunSpace.prototype._runSync = function (contextSpec, args) {
+        var context = contextSpec.createInstance();
+        var parser = parseSync_1.parseSync(context, args);
+        var runSyncMethod = contextSpec.runSyncMethod;
+        if (runSyncMethod) {
+            context[runSyncMethod.key]();
+        }
+        var subcontextSpec = parser.subcontextSpec;
+        if (subcontextSpec) {
+            this._runSync(subcontextSpec, parser.cursor.slice());
+        }
     };
     return RunSpace;
 }());
