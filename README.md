@@ -16,7 +16,7 @@ class HelloGoodbye {
     return this.bye ? 'Goodbye' : 'Hello';
   }
 
-  @Run()
+  @RunSync()
   run() {
     console.log('%s, %s!', this.greeting, this.to);
   }

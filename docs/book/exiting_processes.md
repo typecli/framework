@@ -8,7 +8,8 @@ WIP: brief explanation of exiting processes
 import { exit, Run, runSync } from '@typecli/framework';
 
 class Command {
-  @Run() run() {
+  @RunSync()
+  run() {
     exit();
   }
 }
@@ -24,7 +25,8 @@ exits with a status of 0.
 import { exit, Run, runSync } from '@typecli/framework';
 
 class Command {
-  @Run() run() {
+  @RunSync()
+  run() {
     exit(1);
   }
 }

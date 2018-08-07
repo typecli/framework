@@ -8,7 +8,8 @@ import { Argument, Parsed, Run, Sub, runSync } from '@typecli/framework';
 class Hello {
   @Argument() face?: string; 
 
-  @Run() hello() {
+  @RunSync()
+  hello() {
 	  console.log(`Hello ${this.face}`);
   }
 }
@@ -16,7 +17,8 @@ class Hello {
 class Bye {
   @Argument() face?: string;
 
-  @Run() bye() {
+  @RunSync()
+  bye() {
 	  console.log(`Goodbye ${this.face}`);
   }
 }

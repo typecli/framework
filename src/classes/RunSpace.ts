@@ -25,10 +25,21 @@ export class RunSpace {
       .then(() => {
         WORLD.runSpaces.pop();
       })
-      .catch(e => {
+      .catch(err => {
         WORLD.runSpaces.pop();
-        throw e;
+        throw err;
       });
+  }
+
+  runSync(contextClass: ContextClassType, args: string[]): void {
+    WORLD.runSpaces.push(this);
+    try {
+      this._runSync(WORLD.getContextSpecOfClass(contextClass), args);
+      WORLD.runSpaces.pop();
+    } catch (err) {
+      WORLD.runSpaces.pop();
+      throw err;
+    }
   }
 
   private async _run(contextSpec: ContextSpec, args: string[]): Promise<void> {
@@ -47,6 +58,19 @@ export class RunSpace {
       return this._run(subcontextSpec, parser.cursor.slice());
     }
     return Promise.resolve();
+  }
+
+  private _runSync(contextSpec: ContextSpec, args: string[]): void {
+    const context = contextSpec.createInstance();
+    const parser = parseSync(context, args);
+    const runSyncMethod = contextSpec.runSyncMethod;
+    if (runSyncMethod) {
+      context[runSyncMethod.key]();
+    }
+    const subcontextSpec = parser.subcontextSpec;
+    if (subcontextSpec) {
+      this._runSync(subcontextSpec, parser.cursor.slice());
+    }
   }
 }
 

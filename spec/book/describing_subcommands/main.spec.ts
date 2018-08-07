@@ -1,6 +1,7 @@
 // tslint:disable-next-line:no-implicit-dependencies
 import { capture } from '@typescript-plus/stream-capture';
-import { Argument, Run, runSync, Sub } from '../../../src';
+import { Argument, runSync, Sub } from '../../../src';
+import { RunSync } from '../../../src/decorators/RunSync';
 
 // tslint:disable:member-ordering
 // tslint:disable:no-console
@@ -9,7 +10,7 @@ import { Argument, Run, runSync, Sub } from '../../../src';
 class Hello {
   @Argument() face?: string;
 
-  @Run()
+  @RunSync()
   hello() {
     console.log(`Hello ${this.face}`);
   }
@@ -18,7 +19,7 @@ class Hello {
 class Bye {
   @Argument() face?: string;
 
-  @Run()
+  @RunSync()
   bye() {
     console.log(`Goodbye ${this.face}`);
   }

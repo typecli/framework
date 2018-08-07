@@ -19,6 +19,7 @@ export class ContextSpec {
   helpData?: HelpData;
   options = new FunctionalMap<string, OptionModelType | OptionArrayModelType>();
   runMethod?: RunMethod;
+  runSyncMethod?: RunMethod;
   subspecs: ContextSpec[] = [];
   terminator?: TerminatorModelType;
   variadicArguments?: VariadicArgumentsModelType;
@@ -73,6 +74,10 @@ export class ContextSpec {
 
   setRunMethod(method: RunMethod) {
     this.runMethod = method;
+  }
+
+  setRunSyncMethod(method: RunMethod) {
+    this.runSyncMethod = method;
   }
 
   setTerminatorModel(model: TerminatorModelType) {
