@@ -1,7 +1,6 @@
 // tslint:disable-next-line:no-implicit-dependencies
 import { capture } from '@typescript-plus/stream-capture';
-import { Argument, runSync, Sub } from '../../../src';
-import { RunSync } from '../../../src/decorators/RunSync';
+import { Argument, runSync, RunSync, Sub } from '../../../src';
 
 // tslint:disable:member-ordering
 // tslint:disable:no-console

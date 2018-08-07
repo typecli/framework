@@ -1,7 +1,6 @@
 // tslint:disable-next-line:no-implicit-dependencies
 import { capture } from '@typescript-plus/stream-capture';
-import { Argument, Option, runSync } from '../../src';
-import { RunSync } from '../../src/decorators/RunSync';
+import { Argument, Option, runSync, RunSync } from '../../src';
 
 // tslint:disable:max-classes-per-file
 // tslint:disable:member-ordering
