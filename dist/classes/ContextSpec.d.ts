@@ -13,7 +13,6 @@ export declare class ContextSpec {
     helpData?: HelpData;
     options: FunctionalMap<string, OptionModelType | OptionArrayModelType>;
     runMethod?: RunMethod;
-    runSyncMethod?: RunMethod;
     subspecs: ContextSpec[];
     terminator?: TerminatorModelType;
     variadicArguments?: VariadicArgumentsModelType;
@@ -28,7 +27,6 @@ export declare class ContextSpec {
     setHelpData(data: HelpData): void;
     setOptionModel(model: OptionModelType | OptionArrayModelType): void;
     setRunMethod(method: RunMethod): void;
-    setRunSyncMethod(method: RunMethod): void;
     setTerminatorModel(model: TerminatorModelType): void;
     setVariadicArgumentsModel(model: VariadicArgumentsModelType): void;
 }

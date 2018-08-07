@@ -36,6 +36,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var Exit_1 = require("../errors/Exit");
+var NotSynchronousRunnerMethodError_1 = require("../errors/NotSynchronousRunnerMethodError");
 var parseSync_1 = require("../functions/parseSync");
 var world_1 = require("../world");
 var RunSpace = (function () {
@@ -109,9 +110,13 @@ var RunSpace = (function () {
     RunSpace.prototype._runSync = function (contextSpec, args) {
         var context = contextSpec.createInstance();
         var parser = parseSync_1.parseSync(context, args);
-        var runSyncMethod = contextSpec.runSyncMethod;
-        if (runSyncMethod) {
-            context[runSyncMethod.key]();
+        var runMethod = contextSpec.runMethod;
+        if (runMethod) {
+            var runResult = context[runMethod.key]();
+            if (runResult !== undefined && typeof runResult.then === 'function') {
+                throw new NotSynchronousRunnerMethodError_1.NotSynchronousRunnerMethodError();
+            }
+            return;
         }
         var subcontextSpec = parser.subcontextSpec;
         if (subcontextSpec) {
