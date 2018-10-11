@@ -13,11 +13,15 @@ Based on [Keep a Changelog].
 
 ## Versions
 
-### 0.3.1
+### 0.4.0
 
 #### Added
 
-* The ShowVersion decorator is added.
+* ShowVersion decorator.
+
+#### Changed
+
+* Updated libraries.
 
 ### 0.3.0
 

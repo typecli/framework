@@ -1,8 +1,11 @@
 "use strict";
 var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    }
     return function (d, b) {
         extendStatics(d, b);
         function __() { this.constructor = d; }
@@ -17,7 +20,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var mixin_decorator_1 = require("@typescript-plus/mixin-decorator");
-var _1 = require("../");
+var __1 = require("../");
 var mixins_1 = require("../classes/attribute_model/mixins");
 var AttributeModel_1 = require("../classes/AttributeModel");
 var EventEmitter_1 = require("../classes/EventEmitter");
@@ -34,7 +37,7 @@ var DateOptionModel = (function (_super) {
     }
     DateOptionModel.prototype.extractOptionAndStore = function (parser, name) {
         if (parser.cursor.left < 2) {
-            throw new _1.UndefinedOptionValueError(parser, this, name);
+            throw new __1.UndefinedOptionValueError(parser, this, name);
         }
         parser.context[this.key] = new Date(parser.cursor.at(1));
         return 2;

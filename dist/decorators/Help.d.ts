@@ -3,4 +3,4 @@ export interface HelpOptions {
     footer?: string;
     header?: string;
 }
-export declare function Help(options?: HelpOptions): <T extends new (...args: any[]) => any>(constructor: T) => T;
+export declare function Help(options?: HelpOptions): <T extends import("../types").ConstructorType>(constructor: T) => T;
