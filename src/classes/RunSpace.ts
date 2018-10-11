@@ -44,12 +44,12 @@ export class RunSpace {
   }
 
   private async _run(contextSpec: ContextSpec, args: string[]): Promise<void> {
-    const context = contextSpec.createInstance();
+    const context = contextSpec.createInstance() as { [key: string]: () => any };
     const parser = parseSync(context, args);
     const runMethod = contextSpec.runMethod;
     if (runMethod) {
       const runResult = context[runMethod.key]();
-      if (runResult !== undefined && typeof runResult.then === 'function') {
+      if (runResult !== undefined && typeof (runResult as { then?: any }).then === 'function') {
         return runResult as Promise<void>;
       }
       return Promise.resolve();
@@ -62,12 +62,12 @@ export class RunSpace {
   }
 
   private _runSync(contextSpec: ContextSpec, args: string[]): void {
-    const context = contextSpec.createInstance();
+    const context = contextSpec.createInstance() as { [key: string]: () => any };
     const parser = parseSync(context, args);
     const runMethod = contextSpec.runMethod;
     if (runMethod) {
       const runResult = context[runMethod.key]();
-      if (runResult !== undefined && typeof runResult.then === 'function') {
+      if (runResult !== undefined && typeof (runResult as { then?: any }).then === 'function') {
         throw new NotSynchronousRunnerMethodError();
       }
       return;

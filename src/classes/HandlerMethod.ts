@@ -6,7 +6,7 @@ export class HandlerMethod {
   call(context: ContextType) {
     const keyOrFn = this.keyOrFn;
     if (typeof keyOrFn === 'string') {
-      context[keyOrFn]();
+      (context as { [key: string]: () => void })[keyOrFn]();
     } else {
       keyOrFn.call(context);
     }

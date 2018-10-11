@@ -12,6 +12,7 @@ import {
 export abstract class AttributeModel_defaultValue {
   abstract options: AttributeModelOptions_default;
 
+  // tslint:disable-next-line:no-unsafe-any
   get defaultValue() {
     return this.options.default;
   }

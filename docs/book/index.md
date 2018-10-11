@@ -9,6 +9,8 @@
 * [Calling Option Handlers](./calling_option_handlers.md)
 * [Builtin Validators](./builtin_validators.md)
 * [Generating Help Messages](./generating_help_messages.md)
+* [Defining Help Options](./defining_help_options.md)
+* [Defining Version Options](./defining_version_options.md)
 
 ## Advanced Topics
 

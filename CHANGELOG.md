@@ -13,7 +13,11 @@ Based on [Keep a Changelog].
 
 ## Versions
 
-### Edge (HEAD)
+### 0.3.1
+
+#### Added
+
+* The ShowVersion decorator is added.
 
 ### 0.3.0
 

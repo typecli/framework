@@ -5,6 +5,7 @@ export * from './decorators/Option';
 export * from './decorators/Options';
 export * from './decorators/Run';
 export * from './decorators/ShowHelp';
+export * from './decorators/ShowVersion';
 export * from './decorators/Sub';
 export * from './decorators/Unparsed';
 export * from './decorators/Variadic';
