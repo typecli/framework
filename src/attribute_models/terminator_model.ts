@@ -5,10 +5,10 @@ import { Parser } from '../classes/Parser';
 // tslint:disable-next-line:no-empty-interface
 export interface TerminatorModelOptions {}
 
-const TERMINATOR_PARSER_EVENTS = new AttributeParserEventEmitter<TerminatorModel>();
+const PARSER_EVENTS = new AttributeParserEventEmitter<TerminatorModel>();
 
 export class TerminatorModel extends AttributeModel implements TerminatorModelType {
-  classEvents: AttributeParserEventEmitter<TerminatorModel> = TERMINATOR_PARSER_EVENTS;
+  classEvents: AttributeParserEventEmitter<TerminatorModel> = PARSER_EVENTS;
   events = new AttributeParserEventEmitter();
   variableName!: string;
 

@@ -16,8 +16,10 @@ export interface StringOptionModelOptions
     AttributeModelOptions_required,
     AttributeModelOptions_name {}
 
-const STRING_OPTION_PARSER_EVENTS = new AttributeParserEventEmitter<StringOptionModel>();
-STRING_OPTION_PARSER_EVENTS.on(ATTRIBUTE_PARSER_EVENT.VALIDATE, event => {
+const PARSER_EVENTS = new AttributeParserEventEmitter<StringOptionModel>();
+PARSER_EVENTS.on(ATTRIBUTE_PARSER_EVENT.INITIALIZE, event => {
+  event.parser.context[event.model.key] = event.model.defaultValue;
+}).on(ATTRIBUTE_PARSER_EVENT.VALIDATE, event => {
   if (event.model.options.required) {
     validateOptionRequired(event.parser, event.model);
   }
@@ -27,7 +29,7 @@ STRING_OPTION_PARSER_EVENTS.on(ATTRIBUTE_PARSER_EVENT.VALIDATE, event => {
 @Mixin(AttributeModel_description)
 @Mixin(AttributeModel_optionNames)
 export class StringOptionModel extends AttributeModel implements OptionModelType {
-  classEvents: AttributeParserEventEmitter<StringOptionModel> = STRING_OPTION_PARSER_EVENTS;
+  classEvents: AttributeParserEventEmitter<StringOptionModel> = PARSER_EVENTS;
   defaultValue: any;
   description: string | undefined;
   events = new AttributeParserEventEmitter();

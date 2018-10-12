@@ -16,8 +16,8 @@ export interface DateArgumentModelOptions
     AttributeModelOptions_required,
     AttributeModelOptions_variableName {}
 
-const DATE_ARGUMENT_PARSER_EVENTS = new AttributeParserEventEmitter<DateArgumentModel>();
-DATE_ARGUMENT_PARSER_EVENTS.on(ATTRIBUTE_PARSER_EVENT.VALIDATE, event => {
+const PARSER_EVENTS = new AttributeParserEventEmitter<DateArgumentModel>();
+PARSER_EVENTS.on(ATTRIBUTE_PARSER_EVENT.VALIDATE, event => {
   if (event.model.options.required) {
     validateArgumentRequired(event.parser, event.model);
   }
@@ -26,7 +26,7 @@ DATE_ARGUMENT_PARSER_EVENTS.on(ATTRIBUTE_PARSER_EVENT.VALIDATE, event => {
 @Mixin(AttributeModel_defaultValue)
 @Mixin(AttributeModel_variableName)
 export class DateArgumentModel extends AttributeModel implements ArgumentModelType {
-  classEvents: AttributeParserEventEmitter<DateArgumentModel> = DATE_ARGUMENT_PARSER_EVENTS;
+  classEvents: AttributeParserEventEmitter<DateArgumentModel> = PARSER_EVENTS;
   defaultValue: any;
   description: string | undefined;
   events = new AttributeParserEventEmitter();

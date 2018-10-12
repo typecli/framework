@@ -10,14 +10,14 @@ import { ATTRIBUTE_PARSER_EVENT } from '../events';
 // tslint:disable-next-line:no-empty-interface
 export interface StringOptionArrayModelOptions extends AttributeModelOptions_desc, AttributeModelOptions_name {}
 
-const STRING_OPTION_ARRAY_PARSER_EVENTS = new AttributeParserEventEmitter<StringOptionArrayModel>();
-STRING_OPTION_ARRAY_PARSER_EVENTS.on(ATTRIBUTE_PARSER_EVENT.INITIALIZE, event => {
+const PARSER_EVENTS = new AttributeParserEventEmitter<StringOptionArrayModel>();
+PARSER_EVENTS.on(ATTRIBUTE_PARSER_EVENT.INITIALIZE, event => {
   event.parser.context[event.model.key] = [];
 });
 
 @Mixin(AttributeModel_optionArrayNames)
 export class StringOptionArrayModel extends AttributeModel implements OptionArrayModelType {
-  classEvents: AttributeParserEventEmitter<StringOptionArrayModel> = STRING_OPTION_ARRAY_PARSER_EVENTS;
+  classEvents: AttributeParserEventEmitter<StringOptionArrayModel> = PARSER_EVENTS;
   description: string | undefined;
   events = new AttributeParserEventEmitter();
   hasOptionParameter = true;
