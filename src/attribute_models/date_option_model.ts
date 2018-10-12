@@ -8,7 +8,7 @@ import {
 import { AttributeParserEventEmitter } from '../classes/EventEmitter';
 import { Parser } from '../classes/Parser';
 
-const DATE_ARGUMENT_PARSER_EVENTS = new AttributeParserEventEmitter<DateOptionModel>();
+const PARSER_EVENTS = new AttributeParserEventEmitter<DateOptionModel>();
 // DATE_ARGUMENT_PARSER_EVENTS.on(ATTRIBUTE_PARSER_EVENT.VALIDATE, event => {
 //   if (event.model.options.required) {
 //     validateAttributeRequired(event.model, event.parser);
@@ -24,7 +24,7 @@ export interface DateOptionModelOptions
 @Mixin(AttributeModel_defaultValue)
 @Mixin(AttributeModel_optionNames)
 export class DateOptionModel extends AttributeModel implements OptionModelType {
-  classEvents: AttributeParserEventEmitter<DateOptionModel> = DATE_ARGUMENT_PARSER_EVENTS;
+  classEvents: AttributeParserEventEmitter<DateOptionModel> = PARSER_EVENTS;
   defaultValue: any;
   description: string | undefined;
   events = new AttributeParserEventEmitter();

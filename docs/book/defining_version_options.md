@@ -3,7 +3,7 @@
 WIP: brief explanation of version options
 
 ```ts
-import { Argument, ShowVersion, run } from '@typecli/framework';
+import { run, ShowVersion } from '@typecli/framework';
 
 @ShowVersion('1.0.0')
 class Command {

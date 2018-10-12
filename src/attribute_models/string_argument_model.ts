@@ -18,8 +18,10 @@ export interface StringArgumentModelOptions
     AttributeModelOptions_required,
     AttributeModelOptions_variableName {}
 
-const STRING_ARGUMENT_PARSER_EVENTS = new AttributeParserEventEmitter<StringArgumentModel>();
-STRING_ARGUMENT_PARSER_EVENTS.on(ATTRIBUTE_PARSER_EVENT.VALIDATE, event => {
+const PARSER_EVENTS = new AttributeParserEventEmitter<StringArgumentModel>();
+PARSER_EVENTS.on(ATTRIBUTE_PARSER_EVENT.INITIALIZE, event => {
+  event.parser.context[event.model.key] = event.model.defaultValue;
+}).on(ATTRIBUTE_PARSER_EVENT.VALIDATE, event => {
   if (event.model.options.required) {
     validateArgumentRequired(event.parser, event.model);
   }
@@ -29,7 +31,7 @@ STRING_ARGUMENT_PARSER_EVENTS.on(ATTRIBUTE_PARSER_EVENT.VALIDATE, event => {
 @Mixin(AttributeModel_description)
 @Mixin(AttributeModel_variableName)
 export class StringArgumentModel extends AttributeModel implements ArgumentModelType {
-  classEvents: AttributeParserEventEmitter<StringArgumentModel> = STRING_ARGUMENT_PARSER_EVENTS;
+  classEvents: AttributeParserEventEmitter<StringArgumentModel> = PARSER_EVENTS;
   defaultValue: any;
   description: string | undefined;
   events = new AttributeParserEventEmitter();

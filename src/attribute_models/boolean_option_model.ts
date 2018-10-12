@@ -7,8 +7,12 @@ import {
 } from '../classes/AttributeModelOptions';
 import { AttributeParserEventEmitter } from '../classes/EventEmitter';
 import { Parser } from '../classes/Parser';
+import { ATTRIBUTE_PARSER_EVENT } from '../events';
 
-const BOOLEAN_ARGUMENT_PARSER_EVENTS = new AttributeParserEventEmitter<BooleanOptionModel>();
+const PARSER_EVENTS = new AttributeParserEventEmitter<BooleanOptionModel>();
+PARSER_EVENTS.on(ATTRIBUTE_PARSER_EVENT.INITIALIZE, event => {
+  event.parser.context[event.model.key] = event.model.defaultValue;
+});
 
 // tslint:disable-next-line:no-empty-interface
 export interface BooleanOptionModelOptions
@@ -21,7 +25,7 @@ export interface BooleanOptionModelOptions
 @Mixin(AttributeModel_description)
 @Mixin(AttributeModel_optionNames)
 export class BooleanOptionModel extends AttributeModel implements OptionModelType {
-  classEvents: AttributeParserEventEmitter<BooleanOptionModel> = BOOLEAN_ARGUMENT_PARSER_EVENTS;
+  classEvents: AttributeParserEventEmitter<BooleanOptionModel> = PARSER_EVENTS;
   defaultValue: any;
   description: string | undefined;
   events = new AttributeParserEventEmitter();

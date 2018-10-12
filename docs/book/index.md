@@ -11,6 +11,7 @@
 * [Generating Help Messages](./generating_help_messages.md)
 * [Defining Help Options](./defining_help_options.md)
 * [Defining Version Options](./defining_version_options.md)
+* [Specifying Default Values](./specifying_default_values.md)
 
 ## Advanced Topics
 
