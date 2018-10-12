@@ -25,8 +25,8 @@ var AttributeModel_1 = require("../classes/AttributeModel");
 var EventEmitter_1 = require("../classes/EventEmitter");
 var events_1 = require("../events");
 var validators_1 = require("../validators");
-var DATE_ARGUMENT_PARSER_EVENTS = new EventEmitter_1.AttributeParserEventEmitter();
-DATE_ARGUMENT_PARSER_EVENTS.on(events_1.ATTRIBUTE_PARSER_EVENT.VALIDATE, function (event) {
+var PARSER_EVENTS = new EventEmitter_1.AttributeParserEventEmitter();
+PARSER_EVENTS.on(events_1.ATTRIBUTE_PARSER_EVENT.VALIDATE, function (event) {
     if (event.model.options.required) {
         validators_1.validateArgumentRequired(event.parser, event.model);
     }
@@ -36,7 +36,7 @@ var DateArgumentModel = (function (_super) {
     function DateArgumentModel(key, options) {
         var _this = _super.call(this, key) || this;
         _this.options = options;
-        _this.classEvents = DATE_ARGUMENT_PARSER_EVENTS;
+        _this.classEvents = PARSER_EVENTS;
         _this.events = new EventEmitter_1.AttributeParserEventEmitter();
         return _this;
     }

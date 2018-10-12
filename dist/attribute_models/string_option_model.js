@@ -26,8 +26,10 @@ var AttributeModel_1 = require("../classes/AttributeModel");
 var EventEmitter_1 = require("../classes/EventEmitter");
 var events_1 = require("../events");
 var validators_1 = require("../validators");
-var STRING_OPTION_PARSER_EVENTS = new EventEmitter_1.AttributeParserEventEmitter();
-STRING_OPTION_PARSER_EVENTS.on(events_1.ATTRIBUTE_PARSER_EVENT.VALIDATE, function (event) {
+var PARSER_EVENTS = new EventEmitter_1.AttributeParserEventEmitter();
+PARSER_EVENTS.on(events_1.ATTRIBUTE_PARSER_EVENT.INITIALIZE, function (event) {
+    event.parser.context[event.model.key] = event.model.defaultValue;
+}).on(events_1.ATTRIBUTE_PARSER_EVENT.VALIDATE, function (event) {
     if (event.model.options.required) {
         validators_1.validateOptionRequired(event.parser, event.model);
     }
@@ -37,7 +39,7 @@ var StringOptionModel = (function (_super) {
     function StringOptionModel(key, options) {
         var _this = _super.call(this, key) || this;
         _this.options = options;
-        _this.classEvents = STRING_OPTION_PARSER_EVENTS;
+        _this.classEvents = PARSER_EVENTS;
         _this.events = new EventEmitter_1.AttributeParserEventEmitter();
         _this.hasOptionParameter = true;
         return _this;

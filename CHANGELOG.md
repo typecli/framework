@@ -1,17 +1,21 @@
 
-# Changelog
+# Changelog :)
 
-## :)
-
-### Format
+## Format
 
 Based on [Keep a Changelog].
 
-### Versioning Policy
+## Versioning Policy
 
 [Semantic Versioning Caret]
 
 ## Versions
+
+### 0.4.1
+
+#### Added
+
+* `default` option to set default values for arguments and options.
 
 ### 0.4.0
 

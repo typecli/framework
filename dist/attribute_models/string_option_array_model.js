@@ -25,8 +25,8 @@ var mixins_1 = require("../classes/attribute_model/mixins");
 var AttributeModel_1 = require("../classes/AttributeModel");
 var EventEmitter_1 = require("../classes/EventEmitter");
 var events_1 = require("../events");
-var STRING_OPTION_ARRAY_PARSER_EVENTS = new EventEmitter_1.AttributeParserEventEmitter();
-STRING_OPTION_ARRAY_PARSER_EVENTS.on(events_1.ATTRIBUTE_PARSER_EVENT.INITIALIZE, function (event) {
+var PARSER_EVENTS = new EventEmitter_1.AttributeParserEventEmitter();
+PARSER_EVENTS.on(events_1.ATTRIBUTE_PARSER_EVENT.INITIALIZE, function (event) {
     event.parser.context[event.model.key] = [];
 });
 var StringOptionArrayModel = (function (_super) {
@@ -34,7 +34,7 @@ var StringOptionArrayModel = (function (_super) {
     function StringOptionArrayModel(key, options) {
         var _this = _super.call(this, key) || this;
         _this.options = options;
-        _this.classEvents = STRING_OPTION_ARRAY_PARSER_EVENTS;
+        _this.classEvents = PARSER_EVENTS;
         _this.events = new EventEmitter_1.AttributeParserEventEmitter();
         _this.hasOptionParameter = true;
         return _this;

@@ -15,14 +15,14 @@ var __extends = (this && this.__extends) || (function () {
 Object.defineProperty(exports, "__esModule", { value: true });
 var AttributeModel_1 = require("../classes/AttributeModel");
 var EventEmitter_1 = require("../classes/EventEmitter");
-var TERMINATOR_PARSER_EVENTS = new EventEmitter_1.AttributeParserEventEmitter();
+var PARSER_EVENTS = new EventEmitter_1.AttributeParserEventEmitter();
 var TerminatorModel = (function (_super) {
     __extends(TerminatorModel, _super);
     function TerminatorModel(key, terminatorKeywords, options) {
         var _this = _super.call(this, key) || this;
         _this.terminatorKeywords = terminatorKeywords;
         _this.options = options;
-        _this.classEvents = TERMINATOR_PARSER_EVENTS;
+        _this.classEvents = PARSER_EVENTS;
         _this.events = new EventEmitter_1.AttributeParserEventEmitter();
         return _this;
     }

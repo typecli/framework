@@ -24,8 +24,8 @@ var mixins_1 = require("../classes/attribute_model/mixins");
 var AttributeModel_1 = require("../classes/AttributeModel");
 var EventEmitter_1 = require("../classes/EventEmitter");
 var events_1 = require("../events");
-var STRING_VARIADIC_ARGUMENTS_PARSER_EVENTS = new EventEmitter_1.AttributeParserEventEmitter();
-STRING_VARIADIC_ARGUMENTS_PARSER_EVENTS.on(events_1.ATTRIBUTE_PARSER_EVENT.INITIALIZE, function (event) {
+var PARSER_EVENTS = new EventEmitter_1.AttributeParserEventEmitter();
+PARSER_EVENTS.on(events_1.ATTRIBUTE_PARSER_EVENT.INITIALIZE, function (event) {
     event.parser.context[event.model.key] = [];
 }).on(events_1.ATTRIBUTE_PARSER_EVENT.VALIDATE, function (event) {
 });
@@ -34,7 +34,7 @@ var StringVariadicArgumentsModel = (function (_super) {
     function StringVariadicArgumentsModel(key, options) {
         var _this = _super.call(this, key) || this;
         _this.options = options;
-        _this.classEvents = STRING_VARIADIC_ARGUMENTS_PARSER_EVENTS;
+        _this.classEvents = PARSER_EVENTS;
         _this.events = new EventEmitter_1.AttributeParserEventEmitter();
         return _this;
     }
