@@ -6,7 +6,7 @@ var Option_1 = require("./Option");
 function ShowVersion(version, options) {
     return function (constructor) {
         options = options ? options : {};
-        var name = options.name === undefined ? ['-v', '--version'] : options.name;
+        var name = options.name === undefined ? ['--version'] : options.name;
         var desc = options.desc === undefined ? 'Show version.' : options.desc;
         Option_1.Option({ name: name, desc: desc, type: Boolean })({ constructor: constructor }, '@version');
         Handler_1.Handler(function () {

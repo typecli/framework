@@ -15,8 +15,8 @@ Based on [Keep a Changelog].
 
 #### Changed
 
-* `@ShowHelp` decorator no longer sets the "-h" option, but only "--help".
-* `@ShowVersion` decorator no longer sets the "-v" option, but only "--version".
+* ShowHelp decorator no longer sets the "-h" option, but only "--help".
+* ShowVersion decorator no longer sets the "-v" option, but only "--version".
 
 ### 0.4.1
 
