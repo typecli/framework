@@ -16,7 +16,7 @@ it(__filename, async () => {
     await shouldThrow(
       Exit,
       async () => {
-        await run(Command, ['-v'], { throwOnExit: true });
+        await run(Command, ['--version'], { throwOnExit: true });
       },
       (exit: Exit) => {
         expect(exit.status).toEqual(0);
