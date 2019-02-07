@@ -7,7 +7,7 @@ var Option_1 = require("./Option");
 function ShowHelp(options) {
     return function (constructor) {
         options = options ? options : {};
-        var name = options.name === undefined ? ['-h', '--help'] : options.name;
+        var name = options.name === undefined ? ['--help'] : options.name;
         var desc = options.desc === undefined ? 'Show this help.' : options.desc;
         Option_1.Option({ name: name, desc: desc, type: Boolean })({ constructor: constructor }, '@help');
         Handler_1.Handler(function () {
