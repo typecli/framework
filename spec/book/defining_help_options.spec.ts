@@ -18,7 +18,7 @@ it(__filename, async () => {
     await shouldThrow(
       Exit,
       async () => {
-        await run(Command, ['-h'], { throwOnExit: true });
+        await run(Command, ['--help'], { throwOnExit: true });
       },
       (exit: Exit) => {
         expect(exit.status).toEqual(0);
@@ -29,5 +29,5 @@ it(__filename, async () => {
   expect(captured).toEqual(`command [OPTIONS] [ARG]
 
 Options:
-  --help, -h  Show this help.\n`);
+  --help  Show this help.\n`);
 });
