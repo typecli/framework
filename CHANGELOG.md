@@ -11,6 +11,12 @@ Based on [Keep a Changelog].
 
 ## Versions
 
+### 0.5.1
+
+#### Added
+
+* Option decorator also accepts name / negation-name by a single string.
+
 ### 0.5.0
 
 #### Changed
