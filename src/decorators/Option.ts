@@ -10,7 +10,7 @@ import { WORLD } from '../world';
 export interface OptionOptions {
   default?: any;
   desc?: string;
-  name?: string[];
+  name?: string | string[];
   not?: string | string[];
   required?: boolean;
   type?: any;

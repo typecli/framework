@@ -39,7 +39,7 @@ export class BooleanOptionModel extends AttributeModel implements OptionModelTyp
   @Memoize()
   get negatedOptionNames() {
     const not = this.options.not;
-    return not ? not : [];
+    return Array.isArray(not) ? not : not === undefined ? [] : [not];
   }
 
   extractOptionAndStore(parser: Parser, name: string): number {

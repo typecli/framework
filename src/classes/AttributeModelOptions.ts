@@ -10,7 +10,7 @@ export interface AttributeModelOptions_desc {
 
 // tslint:disable-next-line:class-name
 export interface AttributeModelOptions_name {
-  name?: string[];
+  name?: string | string[];
 }
 
 // tslint:disable-next-line:class-name
@@ -25,7 +25,7 @@ export interface AttributeModelOptions_required {
 
 // tslint:disable-next-line:class-name
 export interface AttributeModelOptions_not {
-  not?: string[];
+  not?: string | string[];
 }
 
 // tslint:disable-next-line:class-name

@@ -39,8 +39,11 @@ export abstract class AttributeModel_optionNames {
   @Memoize()
   get optionNames() {
     const names = this.options.name;
-    if (names) {
+    if (Array.isArray(names)) {
       return names;
+    }
+    if (names !== undefined) {
+      return [names];
     }
     const name = this.key;
     return [name.length === 1 ? `-${name}` : `--${name}`];
