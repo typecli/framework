@@ -11,6 +11,12 @@ Based on [Keep a Changelog].
 
 ## Versions
 
+### 0.6.0
+
+#### Changed
+
+* Parser converts option names to kebab case. 
+
 ### 0.5.1
 
 #### Added
