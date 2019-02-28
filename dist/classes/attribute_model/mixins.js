@@ -54,8 +54,11 @@ var AttributeModel_optionArrayNames = (function () {
     Object.defineProperty(AttributeModel_optionArrayNames.prototype, "optionNames", {
         get: function () {
             var names = this.options.name;
-            if (names) {
+            if (Array.isArray(names)) {
                 return names;
+            }
+            if (names !== undefined) {
+                return [names];
             }
             var name = pluralize.singular(this.key);
             return [name.length === 1 ? "-" + name : "--" + name];

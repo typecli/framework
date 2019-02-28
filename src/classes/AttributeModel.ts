@@ -1,4 +1,5 @@
 import { Memoize } from '@typescript-plus/fast-memoize-decorator';
+import { kebab } from 'case';
 import { ATTRIBUTE_PARSER_EVENT } from '../events';
 import {
   AttributeModel_extractArgumentAndStore, AttributeModel_extractOptionAndStore, AttributeModel_hasOptionParameter,
@@ -46,7 +47,7 @@ export abstract class AttributeModel_optionNames {
       return [names];
     }
     const name = this.key;
-    return [name.length === 1 ? `-${name}` : `--${name}`];
+    return [name.length === 1 ? `-${name}` : `--${kebab(name)}`];
   }
 }
 

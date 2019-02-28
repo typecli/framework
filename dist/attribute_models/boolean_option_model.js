@@ -42,7 +42,7 @@ var BooleanOptionModel = (function (_super) {
     Object.defineProperty(BooleanOptionModel.prototype, "negatedOptionNames", {
         get: function () {
             var not = this.options.not;
-            return not ? not : [];
+            return Array.isArray(not) ? not : not === undefined ? [] : [not];
         },
         enumerable: true,
         configurable: true

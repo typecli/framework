@@ -5,7 +5,7 @@ export interface AttributeModelOptions_desc {
     desc?: string;
 }
 export interface AttributeModelOptions_name {
-    name?: string[];
+    name?: string | string[];
 }
 export interface AttributeModelOptions_variableName {
     variableName?: string;
@@ -14,7 +14,7 @@ export interface AttributeModelOptions_required {
     required?: boolean;
 }
 export interface AttributeModelOptions_not {
-    not?: string[];
+    not?: string | string[];
 }
 export interface AttributeModelOptions_min {
     min?: number;
