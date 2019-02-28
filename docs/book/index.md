@@ -3,6 +3,7 @@
 ## Basics
 
 * [Running Commands](./running_commands.md)
+* [Exiting Processes](./exiting_processes.md)
 * [Describing Command-Line Syntax](./describing_command-line_syntax.md)
 * [Syntax Items](./syntax_items.md)
 * [Value Types of Arguments and Options](./value_types_of_arguments_and_options.md)
