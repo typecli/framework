@@ -1,1 +1,0 @@
-{"version":3,"file":"wrapByArray.js","sourceRoot":"","sources":["../../src/functions/wrapByArray.ts"],"names":[],"mappings":";;AAAA,SAAgB,WAAW,CAAI,CAAsB;IACnD,IAAI,CAAC,YAAY,KAAK,EAAE;QACtB,OAAO,CAAC,CAAC;KACV;IACD,IAAI,CAAC,KAAK,SAAS,EAAE;QACnB,OAAO,IAAI,KAAK,EAAK,CAAC;KACvB;IACD,OAAO,CAAC,CAAC,CAAC,CAAC;AACb,CAAC;AARD,kCAQC"}

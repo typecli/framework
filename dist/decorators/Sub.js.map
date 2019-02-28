@@ -1,1 +1,0 @@
-{"version":3,"file":"Sub.js","sourceRoot":"","sources":["../../src/decorators/Sub.ts"],"names":[],"mappings":";;AACA,kCAAiC;AAEjC,SAAgB,GAAG,CAAC,KAAuB;IACzC,OAAO,UAAqC,WAAc;QACxD,aAAK,CAAC,qBAAqB,CAAC,WAAW,CAAC,CAAC,UAAU,CAAC,aAAK,CAAC,qBAAqB,CAAC,KAAK,CAAC,CAAC,CAAC;QACxF,OAAO,WAAW,CAAC;IACrB,CAAC,CAAC;AACJ,CAAC;AALD,kBAKC"}
