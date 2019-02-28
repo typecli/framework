@@ -1,6 +1,7 @@
 export * from './decorators/Argument';
 export * from './decorators/Handler';
 export * from './decorators/Help';
+export * from './decorators/IncludeSyntax';
 export * from './decorators/Option';
 export * from './decorators/Options';
 export * from './decorators/Run';
