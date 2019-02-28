@@ -11,6 +11,12 @@ Based on [Keep a Changelog].
 
 ## Versions
 
+### 0.6.1
+
+#### Added
+
+* IncludeSyntax decorator.
+
 ### 0.6.0
 
 #### Changed
