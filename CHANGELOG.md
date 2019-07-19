@@ -11,6 +11,13 @@ Based on [Keep a Changelog].
 
 ## Versions
 
+### 0.6.2
+
+#### Added
+
+* Throws NoSubcommandError when subcommand is missing.
+* Generates negated option names in help messages.
+
 ### 0.6.1
 
 #### Added

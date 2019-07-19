@@ -1,6 +1,6 @@
 {
   "name": "@typecli/framework",
-  "version": "0.6.1",
+  "version": "0.6.2",
   "description": "A TypeScript library for building command-line interface applications in a strong-typing way.",
   "keywords": [
     "args",
