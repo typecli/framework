@@ -13,6 +13,11 @@ class HeadAndBody<T extends ArgumentModelType | OptionModelType | OptionArrayMod
   constructor(public model: T, public head: string, public body: string) {}
 
   @Memoize()
+  get headLines() {
+    return this.head.split('\n');
+  }
+
+  @Memoize()
   get bodyLines() {
     return this.body.split('\n');
   }
@@ -23,22 +28,30 @@ class HeadsAndBodies<T extends ArgumentModelType | OptionModelType | OptionArray
 
   @Memoize()
   get maxHeadLength() {
-    return Math.max(...this.data.map(e => e.head.length));
+    return Math.max(...this.data.map(e => Math.max(...e.headLines.map(e2 => e2.length))));
   }
 
   render() {
     const buf: string[] = [];
     const sorted = this.data.sort((a, b) => a.head.localeCompare(b.head));
     sorted.forEach(hnb => {
+      const headLines = hnb.headLines.slice();
       const bodyLines = hnb.bodyLines.slice();
       const defaultValue = (hnb.model as { defaultValue: any }).defaultValue;
       if (defaultValue !== undefined) {
         bodyLines.push(`(default: ${defaultValue})`);
       }
-      buf.push(`  ${hnb.head.padEnd(this.maxHeadLength)}  ${bodyLines[0]}`);
-      bodyLines.slice(1).forEach(e => {
-        buf.push(`  ${' '.repeat(this.maxHeadLength)}  ${e}`);
-      });
+      const maxLines = Math.max(headLines.length, bodyLines.length);
+      for (let i = 0; i < maxLines; ++i) {
+        const headLine = headLines[i] as string | undefined;
+        const bodyLine = bodyLines[i] as string | undefined;
+        let line =
+          headLine === undefined ? `  ${' '.repeat(this.maxHeadLength)}` : `  ${headLine.padEnd(this.maxHeadLength)}`;
+        if (bodyLine !== undefined) {
+          line = `${line}  ${bodyLine}`;
+        }
+        buf.push(line);
+      }
     });
     return buf.join('\n');
   }
@@ -93,7 +106,12 @@ class Builder {
     this.contextSpec.options.forEach(option => {
       const desc = option.description;
       if (desc !== undefined) {
-        const head = option.optionNames.sort().join(', ');
+        let head = option.optionNames.sort().join(', ');
+        const negatedOptionNames = ((option as unknown) as { negatedOptionNames: string[] | undefined })
+          .negatedOptionNames;
+        if (negatedOptionNames !== undefined && negatedOptionNames.length > 0) {
+          head = `${head} (not: ${negatedOptionNames.join(', ')})`;
+        }
         list.data.push(new HeadAndBody(option, head, desc));
       }
     });
