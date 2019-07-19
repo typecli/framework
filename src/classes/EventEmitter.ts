@@ -37,7 +37,7 @@ export class EventEmitter<N extends string, E extends Event<N>> {
   }
 
   on(event: N, listener: EventListener<N, E>) {
-    const wrapper = (...args: any[]) => {
+    const wrapper = (...args: [E, ...any[]]) => {
       listener.apply(undefined, args);
     };
     this.emitter.on(event, wrapper);
@@ -46,7 +46,7 @@ export class EventEmitter<N extends string, E extends Event<N>> {
   }
 
   once(event: N, listener: EventListener<N, E>) {
-    const wrapper = (...args: any[]) => {
+    const wrapper = (...args: [E, ...any[]]) => {
       listener.apply(undefined, args);
     };
     this.emitter.once(event, wrapper);
