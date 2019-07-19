@@ -1,6 +1,7 @@
 // tslint:disable:max-classes-per-file
 import { BuiltinClass } from '@typescript-plus/builtin-class-decorator';
 import { ArgumentModelType, AttributeModel, OptionArrayModelType, OptionModelType } from './classes/AttributeModel';
+import { ContextSpec } from './classes/ContextSpec';
 import { Parser } from './classes/Parser';
 import { ClassDecoratorTargetType } from './types';
 
@@ -53,6 +54,18 @@ export class MissingOptionError<M extends OptionModelType> extends MissingAttrib
 
   get message() {
     return `Missing option: ${this.model.optionNames[0]}`;
+  }
+}
+
+export class NoSubcommandError extends ParserError {
+  constructor(parser: Parser, contextSpec: ContextSpec) {
+    super(
+      parser,
+      `Specify subcommand: ${contextSpec.subspecs
+        .map(e => e.commandName)
+        .sort()
+        .join(', ')}`
+    );
   }
 }
 

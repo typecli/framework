@@ -1,6 +1,6 @@
 import { Memoize } from '@typescript-plus/fast-memoize-decorator';
 import { ContextSpec } from '../classes/ContextSpec';
-import { MultipleParameterizedOptionsError, UnknownOptionError } from '../errors';
+import { MultipleParameterizedOptionsError, NoSubcommandError, UnknownOptionError } from '../errors';
 import { ATTRIBUTE_PARSER_EVENT } from '../events';
 import { ConstructorType, ContextType } from '../types';
 import { WORLD } from '../world';
@@ -169,6 +169,9 @@ export class Parser {
   }
 
   validate() {
+    if (this.subcontextSpec === undefined && this.contextSpec.subspecs.length > 0) {
+      throw new NoSubcommandError(this, this.contextSpec);
+    }
     this.contextSpec.attributeModels.forEach(v => {
       v.emitParserEvent(ATTRIBUTE_PARSER_EVENT.BEFORE_VALIDATE, this);
     });
