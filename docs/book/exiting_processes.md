@@ -14,7 +14,7 @@ class Command {
   }
 }
 
-runSync(Command);
+runSync(new Command());
 ```
 
 exits with a status of 0.
@@ -31,7 +31,7 @@ class Command {
   }
 }
 
-runSync(Command);
+runSync(new Command());
 ```
 
 exits with a status of 1.
