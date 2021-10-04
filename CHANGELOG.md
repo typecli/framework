@@ -1,95 +1,91 @@
 
 # Changelog :)
 
-## Format
+Based on [Keep a Changelog] and [Semantic Versioning Caret].
 
-Based on [Keep a Changelog].
+## 0.7.0
 
-## Versioning Policy
+* Updated dependencies.
 
-[Semantic Versioning Caret]
+## 0.6.2
 
-## Versions
-
-### 0.6.2
-
-#### Added
+### Added
 
 * Throws NoSubcommandError when subcommand is missing.
 * Generates negated option names in help messages.
 
-### 0.6.1
+## 0.6.1
 
-#### Added
+### Added
 
 * IncludeSyntax decorator.
 
-### 0.6.0
+## 0.6.0
 
-#### Changed
+### Changed
 
 * Parser converts option names to kebab case. 
 
-### 0.5.1
+## 0.5.1
 
-#### Added
+### Added
 
 * Option decorator also accepts name / negation-name by a single string.
 
-### 0.5.0
+## 0.5.0
 
-#### Changed
+### Changed
 
 * ShowHelp decorator no longer sets the "-h" option, but only "--help".
 * ShowVersion decorator no longer sets the "-v" option, but only "--version".
 
-### 0.4.1
+## 0.4.1
 
-#### Added
+### Added
 
 * `default` option to set default values for arguments and options.
 
-### 0.4.0
+## 0.4.0
 
-#### Added
+### Added
 
 * ShowVersion decorator.
 
-#### Changed
+### Changed
 
 * Updated libraries.
 
-### 0.3.0
+## 0.3.0
 
-#### Removed
+### Removed
 
 * The RunSync decorator is removed. Instead, use Run. 
 
-### 0.2.1
+## 0.2.1
 
-#### Fixed
+### Fixed
 
 * RunSync was not exported, but is fixed now. 
 
-### 0.2.0
+## 0.2.0
 
-#### Added
+### Added
 
 * RunSync decorator.
 
-#### Changed
+### Changed
 
 * The runSync function no longer calls methods decorated with Run. Instead, use the RunSync decorator.
 
-### 0.1.2
+## 0.1.2
 
-#### Added
+### Added
 
 * Asynchronous runner.
 
-### 0.1.1
+## 0.1.1
 
-#### Added
+### Added
 
 * MissingAttributeError returns appropriate messages.
 

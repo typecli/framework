@@ -1,11 +1,9 @@
-import { Es5BuiltinClass } from '@typescript-plus/builtin-class-decorator';
 import { AttributeModel } from './classes/AttributeModel';
 import { ArgumentModelType, OptionArrayModelType, OptionModelType } from './classes/attribute_model/types';
 import { ContextSpec } from './classes/ContextSpec';
 import { Parser } from './classes/Parser';
 import { ClassDecoratorTargetType } from './types';
 
-@Es5BuiltinClass()
 export abstract class ThisIsBugError extends Error {
   constructor() {
     super('This is an unknown bug. Please report to https://github.com/typecli/framework/issues.');
@@ -14,7 +12,6 @@ export abstract class ThisIsBugError extends Error {
 
 export class MethodMustNotBeCalled extends ThisIsBugError {}
 
-@Es5BuiltinClass()
 export abstract class ParserError extends Error {
   constructor(public parser: Parser, message?: string) {
     super(message);
@@ -111,7 +108,6 @@ export class UnknownOptionError extends ParserError {
   }
 }
 
-@Es5BuiltinClass()
 export class UnknownAttributeTypeError extends Error {
   constructor(target: ClassDecoratorTargetType, key: string, type: unknown) {
     super(`Unknown attribute type: ${type as string} (${key} in ${target as unknown as string})`);
