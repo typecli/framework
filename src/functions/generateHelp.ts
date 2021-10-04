@@ -165,7 +165,7 @@ class Builder {
   @Memoize()
   get title() {
     const buf: string[] = [];
-    const name = Case.kebab(this.contextSpec.commandName);
+    const name = this.contextSpec.commandName;
     buf.push(name);
     if (this.contextSpec.options.size > 0) {
       if (this.optionIsOptional) {

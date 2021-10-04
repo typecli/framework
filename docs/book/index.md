@@ -13,6 +13,7 @@
 * [Defining Help Options](./defining_help_options.md)
 * [Defining Version Options](./defining_version_options.md)
 * [Specifying Default Values](./specifying_default_values.md)
+* [Specifying Command Name](./specifying_command_names.md)
 
 ## Advanced Topics
 

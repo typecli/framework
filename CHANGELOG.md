@@ -3,7 +3,15 @@
 
 Based on [Keep a Changelog] and [Semantic Versioning Caret].
 
+## 0.7.1
+
+### Added
+
+* The `Command` decorator for specifying command names.
+
 ## 0.7.0
+
+### Changed
 
 * Updated dependencies.
 

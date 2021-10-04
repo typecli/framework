@@ -9,6 +9,7 @@ import {
   TerminatorModelType,
   VariadicArgumentsModelType,
 } from './attribute_model/types';
+import { CommandData } from './CommandData';
 import { FunctionalMap } from './FunctionalMap';
 import { HandlerMethod } from './HandlerMethod';
 import { HelpData } from './HelpData';
@@ -18,6 +19,7 @@ export class ContextSpec {
   _parent?: ContextSpec | undefined;
   arguments = new FunctionalMap<string, ArgumentModelType>();
   attributeModels = new FunctionalMap<string, AttributeModel>();
+  commandData?: CommandData;
   handlerMethods = new FunctionalMap<string, HandlerMethod>();
   helpData?: HelpData;
   options = new FunctionalMap<string, OptionModelType | OptionArrayModelType>();
@@ -36,7 +38,7 @@ export class ContextSpec {
 
   @Memoize()
   get commandName(): string {
-    return Case.kebab(this.klass.name);
+    return this.commandData?.options.name || Case.kebab(this.klass.name);
   }
 
   get parent(): ContextSpec | undefined {
@@ -63,6 +65,10 @@ export class ContextSpec {
 
   setHandlerMethod(handler: HandlerMethod): void {
     this.handlerMethods.set(handler.targetKey, handler);
+  }
+
+  setCommandData(data: CommandData): void {
+    this.commandData = data;
   }
 
   setHelpData(data: HelpData): void {

@@ -1,4 +1,5 @@
 export * from './decorators/Argument';
+export * from './decorators/Command';
 export * from './decorators/Handler';
 export * from './decorators/Help';
 export * from './decorators/IncludeSyntax';
