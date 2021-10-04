@@ -1,5 +1,5 @@
-import { DateArgumentModel, DateArgumentModelOptions } from '../attribute_models/date_argument_model';
-import { StringArgumentModel, StringArgumentModelOptions } from '../attribute_models/string_argument_model';
+import { DateArgumentModel, DateArgumentModelOptions } from '../classes/attribute_models/date_argument_model';
+import { StringArgumentModel, StringArgumentModelOptions } from '../classes/attribute_models/string_argument_model';
 import { ContextSpec } from '../classes/ContextSpec';
 import { UnknownAttributeTypeError } from '../errors';
 import { getDesignTypeMetadata } from '../functions/getDesignTypeMetadata';

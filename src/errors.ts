@@ -1,5 +1,6 @@
 import { Es5BuiltinClass } from '@typescript-plus/builtin-class-decorator';
-import { ArgumentModelType, AttributeModel, OptionArrayModelType, OptionModelType } from './classes/AttributeModel';
+import { AttributeModel } from './classes/AttributeModel';
+import { ArgumentModelType, OptionArrayModelType, OptionModelType } from './classes/attribute_model/types';
 import { ContextSpec } from './classes/ContextSpec';
 import { Parser } from './classes/Parser';
 import { ClassDecoratorTargetType } from './types';

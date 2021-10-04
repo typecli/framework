@@ -1,7 +1,7 @@
 import {
   StringVariadicArgumentsModel,
   StringVariadicArgumentsModelOptions,
-} from '../attribute_models/string_variadic_arguments_model';
+} from '../classes/attribute_models/string_variadic_arguments_model';
 import { ContextSpec } from '../classes/ContextSpec';
 import { UnknownAttributeTypeError } from '../errors';
 import { ClassDecoratorTargetType, ContextClassType, PropertyDecoratorTargetType } from '../types';

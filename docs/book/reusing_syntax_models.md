@@ -6,7 +6,6 @@ WIP: brief explanation of reusing syntax models
 Script:
 
 ```ts
-import { Mixin } from '@typescript-plus/mixin-decorator';
 import { Argument, IncludeSyntax, Option, Run, runSync } from '@typecli/framework';
 
 class Reused {
@@ -17,12 +16,8 @@ class Reused {
   opt!: string;
 }
 
-@Mixin(Reused)
 @IncludeSyntax(Reused)
-class Command implements Reused {
-  arg!: string;
-  opt!: string;
-
+class Command extend Reused {
   @Run()
   run() {
     process.stdout.write(`${this.arg}\n${this.opt}\n`);

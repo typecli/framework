@@ -8,9 +8,9 @@ export type ContextType = {
   [key: string]: any;
   constructor: FunctionType;
 };
-export type ContextClassType = ConstructorType;
+export type ContextClassType = ConcreteConstructorType;
 
-export type ClassDecoratorTargetType = ConstructorType;
+export type ClassDecoratorTargetType = ConcreteConstructorType;
 export type PropertyDecoratorTargetType = { constructor: FunctionType };
 export type InjectionTargetType = { [key: string]: unknown };
 
@@ -27,11 +27,12 @@ export type MethodDecoratorType = (
 ) => void;
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export type ConstructorType = { new (...args: any[]): any };
+export type ConcreteConstructorType = new (...args: any[]) => any;
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type PrototypeOwnerType = { prototype: any };
-export type PrototypeOwnerConstructorType = ConstructorType & PrototypeOwnerType;
+export type PrototypeOwnerConstructorType = ConcreteConstructorType & PrototypeOwnerType;
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export type AbstructConstructorType = FunctionType & { prototype: any };
+export type AbstructConstructorType = abstract new (...args: any[]) => any;
+export type ConstructorType = ConcreteConstructorType | AbstructConstructorType;
 // eslint-disable-next-line @typescript-eslint/ban-types
 export type FunctionType = Function;

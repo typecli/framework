@@ -1,4 +1,3 @@
-import { Mixin } from '@typescript-plus/mixin-decorator';
 import { capture } from '@typescript-plus/stream-capture';
 import { Argument, IncludeSyntax, Option, Run, runSync } from '../../src';
 
@@ -10,12 +9,8 @@ class Reused {
   opt!: string;
 }
 
-@Mixin(Reused)
 @IncludeSyntax(Reused)
-class Command implements Reused {
-  arg!: string;
-  opt!: string;
-
+class Command extends Reused {
   @Run()
   run() {
     process.stdout.write(`${this.arg}\n${this.opt}\n`);

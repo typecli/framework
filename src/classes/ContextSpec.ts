@@ -1,14 +1,14 @@
 import { Memoize } from '@typescript-plus/fast-memoize-decorator';
 import * as Case from 'case';
 import { ContextClassType } from '../types';
+import { AttributeModel } from './AttributeModel';
 import {
   ArgumentModelType,
-  AttributeModel,
   OptionArrayModelType,
   OptionModelType,
   TerminatorModelType,
   VariadicArgumentsModelType,
-} from './AttributeModel';
+} from './attribute_model/types';
 import { FunctionalMap } from './FunctionalMap';
 import { HandlerMethod } from './HandlerMethod';
 import { HelpData } from './HelpData';

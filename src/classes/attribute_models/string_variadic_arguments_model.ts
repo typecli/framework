@@ -1,13 +1,12 @@
-import { Mixin } from '@typescript-plus/mixin-decorator';
-import { AttributeModel_minimumElementCount, AttributeModel_variableName } from '../classes/attribute_model/mixins';
-import { AttributeModel, VariadicArgumentsModelType } from '../classes/AttributeModel';
-import { AttributeModelOptions_min } from '../classes/AttributeModelOptions';
-import { AttributeParserEventEmitter } from '../classes/EventEmitter';
-import { Parser } from '../classes/Parser';
-import { ATTRIBUTE_PARSER_EVENT } from '../events';
+import { AttributeModelMixin_minimumElementCount, AttributeModelMixin_variableName } from '../attribute_model/mixins';
+import { AttributeModel } from '../AttributeModel';
+import { AttributeModelOption_min } from '../attribute_model/option_member_types';
+import { AttributeParserEventEmitter } from '../EventEmitter';
+import { Parser } from '../Parser';
+import { ATTRIBUTE_PARSER_EVENT } from '../../events';
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
-export interface StringVariadicArgumentsModelOptions extends AttributeModelOptions_min {}
+export type StringVariadicArgumentsModelOptions = AttributeModelOption_min;
 
 const PARSER_EVENTS = new AttributeParserEventEmitter<StringVariadicArgumentsModel>();
 PARSER_EVENTS.on(ATTRIBUTE_PARSER_EVENT.INITIALIZE, (event) => {
@@ -17,13 +16,11 @@ PARSER_EVENTS.on(ATTRIBUTE_PARSER_EVENT.INITIALIZE, (event) => {
   //
 });
 
-@Mixin(AttributeModel_variableName)
-@Mixin(AttributeModel_minimumElementCount)
-export class StringVariadicArgumentsModel extends AttributeModel implements VariadicArgumentsModelType {
+export class StringVariadicArgumentsModel extends AttributeModelMixin_variableName(
+  AttributeModelMixin_minimumElementCount(AttributeModel)
+) {
   classEvents: AttributeParserEventEmitter<StringVariadicArgumentsModel> = PARSER_EVENTS;
   events = new AttributeParserEventEmitter();
-  minimumElementCount: number | undefined;
-  variableName!: string;
 
   constructor(key: string, public options: StringVariadicArgumentsModelOptions) {
     super(key);

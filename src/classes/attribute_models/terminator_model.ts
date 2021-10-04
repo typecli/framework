@@ -1,16 +1,17 @@
-import { AttributeModel, TerminatorModelType } from '../classes/AttributeModel';
-import { AttributeParserEventEmitter } from '../classes/EventEmitter';
-import { Parser } from '../classes/Parser';
+import { AttributeModel } from '../AttributeModel';
+import { AttributeParserEventEmitter } from '../EventEmitter';
+import { Parser } from '../Parser';
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface TerminatorModelOptions {}
 
 const PARSER_EVENTS = new AttributeParserEventEmitter<TerminatorModel>();
 
-export class TerminatorModel extends AttributeModel implements TerminatorModelType {
+// export class TerminatorModel extends AttributeModel implements TerminatorModelType {
+export class TerminatorModel extends AttributeModel {
   classEvents: AttributeParserEventEmitter<TerminatorModel> = PARSER_EVENTS;
   events = new AttributeParserEventEmitter();
-  variableName!: string;
+  // variableName!: string;
 
   constructor(key: string, public terminatorKeywords: string[], public options: TerminatorModelOptions) {
     super(key);

@@ -1,8 +1,8 @@
 import { Memoize } from '@typescript-plus/fast-memoize-decorator';
 import * as Case from 'case';
 import * as pluralize from 'pluralize';
-import { ArgumentModelType, OptionArrayModelType, OptionModelType } from '../classes/AttributeModel';
-import { AttributeModelOptions_required } from '../classes/AttributeModelOptions';
+import { AttributeModelOption_required } from '../classes/attribute_model/option_member_types';
+import { ArgumentModelType, OptionArrayModelType, OptionModelType } from '../classes/attribute_model/types';
 import { ContextSpec } from '../classes/ContextSpec';
 import { ContextClassType } from '../types';
 import { WORLD } from '../world';
@@ -95,7 +95,7 @@ class Builder {
 
   @Memoize()
   get optionIsOptional() {
-    return !this.contextSpec.options.every((e) => (e.options as AttributeModelOptions_required).required === true);
+    return !this.contextSpec.options.every((e) => (e.options as AttributeModelOption_required).required === true);
   }
 
   @Memoize()
@@ -175,7 +175,7 @@ class Builder {
       }
     }
     this.contextSpec.arguments.forEach((e) => {
-      if ((e.options as AttributeModelOptions_required).required) {
+      if ((e.options as AttributeModelOption_required).required) {
         buf.push(e.variableName);
       } else {
         buf.push(`[${e.variableName}]`);

@@ -1,5 +1,5 @@
-import { AttributeModel_parsedValueIsMissing } from './classes/attribute_model/interfaces';
-import { ArgumentModelType, OptionModelType } from './classes/AttributeModel';
+import { AttributeModel_parsedValueIsMissing } from './classes/attribute_model/member_types';
+import { ArgumentModelType, OptionModelType } from './classes/attribute_model/types';
 import { Parser } from './classes/Parser';
 import { MissingArgumentError, MissingOptionError } from './errors';
 

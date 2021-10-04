@@ -1,14 +1,17 @@
-import { Mixin } from '@typescript-plus/mixin-decorator';
-import { UndefinedOptionValueError } from '../';
-import { AttributeModel_defaultValue } from '../classes/attribute_model/mixins';
-import { AttributeModel, AttributeModel_optionNames, OptionModelType } from '../classes/AttributeModel';
+import { UndefinedOptionValueError } from '../..';
 import {
-  AttributeModelOptions_default,
-  AttributeModelOptions_desc,
-  AttributeModelOptions_name,
-} from '../classes/AttributeModelOptions';
-import { AttributeParserEventEmitter } from '../classes/EventEmitter';
-import { Parser } from '../classes/Parser';
+  AttributeModelMixin_defaultValue,
+  AttributeModelMixin_description,
+  AttributeModelMixin_optionNames,
+} from '../attribute_model/mixins';
+import { AttributeModel } from '../AttributeModel';
+import {
+  AttributeModelOption_default,
+  AttributeModelOption_desc,
+  AttributeModelOption_name,
+} from '../attribute_model/option_member_types';
+import { AttributeParserEventEmitter } from '../EventEmitter';
+import { Parser } from '../Parser';
 
 const PARSER_EVENTS = new AttributeParserEventEmitter<DateOptionModel>();
 // DATE_ARGUMENT_PARSER_EVENTS.on(ATTRIBUTE_PARSER_EVENT.VALIDATE, event => {
@@ -17,20 +20,16 @@ const PARSER_EVENTS = new AttributeParserEventEmitter<DateOptionModel>();
 //   }
 // });
 
-export interface DateOptionModelOptions
-  extends AttributeModelOptions_default,
-    AttributeModelOptions_desc,
-    AttributeModelOptions_name {}
+export type DateOptionModelOptions = AttributeModelOption_default &
+  AttributeModelOption_desc &
+  AttributeModelOption_name;
 
-@Mixin(AttributeModel_defaultValue)
-@Mixin(AttributeModel_optionNames)
-export class DateOptionModel extends AttributeModel implements OptionModelType {
+export class DateOptionModel extends AttributeModelMixin_defaultValue(
+  AttributeModelMixin_description(AttributeModelMixin_optionNames(AttributeModel))
+) {
   classEvents: AttributeParserEventEmitter<DateOptionModel> = PARSER_EVENTS;
-  defaultValue: unknown;
-  description: string | undefined;
   events = new AttributeParserEventEmitter();
   hasOptionParameter = true;
-  optionNames!: string[];
 
   constructor(key: string, public options: DateOptionModelOptions) {
     super(key);

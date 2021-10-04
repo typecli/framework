@@ -1,4 +1,7 @@
-import { StringOptionArrayModel, StringOptionArrayModelOptions } from '../attribute_models/string_option_array_model';
+import {
+  StringOptionArrayModel,
+  StringOptionArrayModelOptions,
+} from '../classes/attribute_models/string_option_array_model';
 import { ContextSpec } from '../classes/ContextSpec';
 import { UnknownAttributeTypeError } from '../errors';
 import { ClassDecoratorTargetType, ContextClassType, PropertyDecoratorTargetType } from '../types';

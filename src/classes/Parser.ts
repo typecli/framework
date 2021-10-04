@@ -2,9 +2,9 @@ import { Memoize } from '@typescript-plus/fast-memoize-decorator';
 import { ContextSpec } from '../classes/ContextSpec';
 import { MultipleParameterizedOptionsError, NoSubcommandError, UnknownOptionError } from '../errors';
 import { ATTRIBUTE_PARSER_EVENT } from '../events';
-import { ConstructorType, ContextType } from '../types';
+import { ConcreteConstructorType, ContextType } from '../types';
 import { WORLD } from '../world';
-import { ArgumentModelType, OptionArrayModelType, OptionModelType } from './AttributeModel';
+import { ArgumentModelType, OptionArrayModelType, OptionModelType } from './attribute_model/types';
 import { ParserCursor } from './ParserCursor';
 
 export class Parser {
@@ -14,7 +14,7 @@ export class Parser {
   terminated = false;
 
   constructor(public context: ContextType, public args: string[]) {
-    this.contextSpec = WORLD.getContextSpecOfClass(context.constructor as ConstructorType);
+    this.contextSpec = WORLD.getContextSpecOfClass(context.constructor as ConcreteConstructorType);
   }
 
   @Memoize()

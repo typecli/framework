@@ -1,4 +1,4 @@
-import { TerminatorModel, TerminatorModelOptions } from '../attribute_models/terminator_model';
+import { TerminatorModel, TerminatorModelOptions } from '../classes/attribute_models/terminator_model';
 import { ContextSpec } from '../classes/ContextSpec';
 import { ContextClassType, PropertyDecoratorTargetType } from '../types';
 import { WORLD } from '../world';

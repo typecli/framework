@@ -1,6 +1,6 @@
-import { BooleanOptionModel, BooleanOptionModelOptions } from '../attribute_models/boolean_option_model';
-import { DateOptionModel, DateOptionModelOptions } from '../attribute_models/date_option_model';
-import { StringOptionModel, StringOptionModelOptions } from '../attribute_models/string_option_model';
+import { BooleanOptionModel, BooleanOptionModelOptions } from '../classes/attribute_models/boolean_option_model';
+import { DateOptionModel, DateOptionModelOptions } from '../classes/attribute_models/date_option_model';
+import { StringOptionModel, StringOptionModelOptions } from '../classes/attribute_models/string_option_model';
 import { ContextSpec } from '../classes/ContextSpec';
 import { UnknownAttributeTypeError } from '../errors';
 import { getDesignTypeMetadata } from '../functions/getDesignTypeMetadata';

@@ -1,38 +1,36 @@
 import { Memoize } from '@typescript-plus/fast-memoize-decorator';
-import { Mixin } from '@typescript-plus/mixin-decorator';
-import { AttributeModel_defaultValue, AttributeModel_description } from '../classes/attribute_model/mixins';
-import { AttributeModel, AttributeModel_optionNames, OptionModelType } from '../classes/AttributeModel';
 import {
-  AttributeModelOptions_default,
-  AttributeModelOptions_desc,
-  AttributeModelOptions_name,
-  AttributeModelOptions_not,
-} from '../classes/AttributeModelOptions';
-import { AttributeParserEventEmitter } from '../classes/EventEmitter';
-import { Parser } from '../classes/Parser';
-import { ATTRIBUTE_PARSER_EVENT } from '../events';
+  AttributeModelMixin_defaultValue,
+  AttributeModelMixin_description,
+  AttributeModelMixin_optionNames,
+} from '../attribute_model/mixins';
+import { AttributeModel } from '../AttributeModel';
+import {
+  AttributeModelOption_default,
+  AttributeModelOption_desc,
+  AttributeModelOption_name,
+  AttributeModelOption_not,
+} from '../attribute_model/option_member_types';
+import { AttributeParserEventEmitter } from '../EventEmitter';
+import { Parser } from '../Parser';
+import { ATTRIBUTE_PARSER_EVENT } from '../../events';
 
 const PARSER_EVENTS = new AttributeParserEventEmitter<BooleanOptionModel>();
 PARSER_EVENTS.on(ATTRIBUTE_PARSER_EVENT.INITIALIZE, (event) => {
   event.parser.context[event.model.key] = event.model.defaultValue;
 });
 
-export interface BooleanOptionModelOptions
-  extends AttributeModelOptions_default,
-    AttributeModelOptions_name,
-    AttributeModelOptions_desc,
-    AttributeModelOptions_not {}
+export type BooleanOptionModelOptions = AttributeModelOption_default &
+  AttributeModelOption_name &
+  AttributeModelOption_desc &
+  AttributeModelOption_not;
 
-@Mixin(AttributeModel_defaultValue)
-@Mixin(AttributeModel_description)
-@Mixin(AttributeModel_optionNames)
-export class BooleanOptionModel extends AttributeModel implements OptionModelType {
+export class BooleanOptionModel extends AttributeModelMixin_defaultValue(
+  AttributeModelMixin_description(AttributeModelMixin_optionNames(AttributeModel))
+) {
   classEvents: AttributeParserEventEmitter<BooleanOptionModel> = PARSER_EVENTS;
-  defaultValue: unknown;
-  description: string | undefined;
   events = new AttributeParserEventEmitter();
   hasOptionParameter = false;
-  optionNames!: string[];
 
   constructor(key: string, public options: BooleanOptionModelOptions) {
     super(key);

@@ -6,7 +6,6 @@
     "rootDir": ".",
     "module": "CommonJS",
     "target": "ES5",
-    // "lib": ["es2020"],
     "emitDecoratorMetadata": true
   },
   "include": [

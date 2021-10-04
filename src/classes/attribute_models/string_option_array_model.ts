@@ -1,26 +1,23 @@
-import { Mixin } from '@typescript-plus/mixin-decorator';
-import { UndefinedOptionValueError } from '../';
-import { AttributeModel_optionArrayNames } from '../classes/attribute_model/mixins';
-import { AttributeModel, OptionArrayModelType } from '../classes/AttributeModel';
-import { AttributeModelOptions_desc, AttributeModelOptions_name } from '../classes/AttributeModelOptions';
-import { AttributeParserEventEmitter } from '../classes/EventEmitter';
-import { Parser } from '../classes/Parser';
-import { ATTRIBUTE_PARSER_EVENT } from '../events';
+import { UndefinedOptionValueError } from '../..';
+import { AttributeModelMixin_arrayOptionNames } from '../attribute_model/mixins';
+import { AttributeModel } from '../AttributeModel';
+import { AttributeModelOption_desc, AttributeModelOption_name } from '../attribute_model/option_member_types';
+import { AttributeParserEventEmitter } from '../EventEmitter';
+import { Parser } from '../Parser';
+import { ATTRIBUTE_PARSER_EVENT } from '../../events';
 
-export interface StringOptionArrayModelOptions extends AttributeModelOptions_desc, AttributeModelOptions_name {}
+export type StringOptionArrayModelOptions = AttributeModelOption_desc & AttributeModelOption_name;
 
 const PARSER_EVENTS = new AttributeParserEventEmitter<StringOptionArrayModel>();
 PARSER_EVENTS.on(ATTRIBUTE_PARSER_EVENT.INITIALIZE, (event) => {
   event.parser.context[event.model.key] = [];
 });
 
-@Mixin(AttributeModel_optionArrayNames)
-export class StringOptionArrayModel extends AttributeModel implements OptionArrayModelType {
+export class StringOptionArrayModel extends AttributeModelMixin_arrayOptionNames(AttributeModel) {
   classEvents: AttributeParserEventEmitter<StringOptionArrayModel> = PARSER_EVENTS;
   description: string | undefined;
   events = new AttributeParserEventEmitter();
   hasOptionParameter = true;
-  optionNames!: string[];
 
   constructor(key: string, public options: StringOptionArrayModelOptions) {
     super(key);
