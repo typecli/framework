@@ -2,8 +2,12 @@ import { Memoize } from '@typescript-plus/fast-memoize-decorator';
 import * as Case from 'case';
 import { ContextClassType } from '../types';
 import {
-  ArgumentModelType, AttributeModel, OptionArrayModelType, OptionModelType, TerminatorModelType,
-  VariadicArgumentsModelType
+  ArgumentModelType,
+  AttributeModel,
+  OptionArrayModelType,
+  OptionModelType,
+  TerminatorModelType,
+  VariadicArgumentsModelType,
 } from './AttributeModel';
 import { FunctionalMap } from './FunctionalMap';
 import { HandlerMethod } from './HandlerMethod';
@@ -11,8 +15,7 @@ import { HelpData } from './HelpData';
 import { RunMethod } from './RunMethod';
 
 export class ContextSpec {
-  // tslint:disable-next-line:variable-name
-  _parent?: ContextSpec;
+  _parent?: ContextSpec | undefined;
   arguments = new FunctionalMap<string, ArgumentModelType>();
   attributeModels = new FunctionalMap<string, AttributeModel>();
   handlerMethods = new FunctionalMap<string, HandlerMethod>();
@@ -26,17 +29,17 @@ export class ContextSpec {
   constructor(public klass: ContextClassType) {}
 
   @Memoize()
-  get caption() {
+  get caption(): string | undefined {
     const help = this.helpData;
     return help ? help.options.caption : undefined;
   }
 
   @Memoize()
-  get commandName() {
+  get commandName(): string {
     return Case.kebab(this.klass.name);
   }
 
-  get parent() {
+  get parent(): ContextSpec | undefined {
     return this._parent;
   }
 
@@ -44,43 +47,43 @@ export class ContextSpec {
     this._parent = v;
   }
 
-  addSubspec(spec: ContextSpec) {
+  addSubspec(spec: ContextSpec): void {
     this.subspecs.push(spec);
     spec.parent = this;
   }
 
-  createInstance() {
+  createInstance(): unknown {
     return new this.klass();
   }
 
-  setArgumentModel(model: ArgumentModelType) {
+  setArgumentModel(model: ArgumentModelType): void {
     this.attributeModels.set(model.key, model);
     this.arguments.set(model.key, model);
   }
 
-  setHandlerMethod(handler: HandlerMethod) {
+  setHandlerMethod(handler: HandlerMethod): void {
     this.handlerMethods.set(handler.targetKey, handler);
   }
 
-  setHelpData(data: HelpData) {
+  setHelpData(data: HelpData): void {
     this.helpData = data;
   }
 
-  setOptionModel(model: OptionModelType | OptionArrayModelType) {
+  setOptionModel(model: OptionModelType | OptionArrayModelType): void {
     this.attributeModels.set(model.key, model);
     this.options.set(model.key, model);
   }
 
-  setRunMethod(method: RunMethod) {
+  setRunMethod(method: RunMethod): void {
     this.runMethod = method;
   }
 
-  setTerminatorModel(model: TerminatorModelType) {
+  setTerminatorModel(model: TerminatorModelType): void {
     this.attributeModels.set(model.key, model);
     this.terminator = model;
   }
 
-  setVariadicArgumentsModel(model: VariadicArgumentsModelType) {
+  setVariadicArgumentsModel(model: VariadicArgumentsModelType): void {
     this.attributeModels.set(model.key, model);
     this.variadicArguments = model;
   }

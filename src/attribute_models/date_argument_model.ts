@@ -2,8 +2,10 @@ import { Mixin } from '@typescript-plus/mixin-decorator';
 import { AttributeModel_defaultValue, AttributeModel_variableName } from '../classes/attribute_model/mixins';
 import { ArgumentModelType, AttributeModel } from '../classes/AttributeModel';
 import {
-  AttributeModelOptions_default, AttributeModelOptions_desc, AttributeModelOptions_required,
-  AttributeModelOptions_variableName
+  AttributeModelOptions_default,
+  AttributeModelOptions_desc,
+  AttributeModelOptions_required,
+  AttributeModelOptions_variableName,
 } from '../classes/AttributeModelOptions';
 import { AttributeParserEventEmitter } from '../classes/EventEmitter';
 import { Parser } from '../classes/Parser';
@@ -17,7 +19,7 @@ export interface DateArgumentModelOptions
     AttributeModelOptions_variableName {}
 
 const PARSER_EVENTS = new AttributeParserEventEmitter<DateArgumentModel>();
-PARSER_EVENTS.on(ATTRIBUTE_PARSER_EVENT.VALIDATE, event => {
+PARSER_EVENTS.on(ATTRIBUTE_PARSER_EVENT.VALIDATE, (event) => {
   if (event.model.options.required) {
     validateArgumentRequired(event.parser, event.model);
   }
@@ -27,7 +29,7 @@ PARSER_EVENTS.on(ATTRIBUTE_PARSER_EVENT.VALIDATE, event => {
 @Mixin(AttributeModel_variableName)
 export class DateArgumentModel extends AttributeModel implements ArgumentModelType {
   classEvents: AttributeParserEventEmitter<DateArgumentModel> = PARSER_EVENTS;
-  defaultValue: any;
+  defaultValue: unknown;
   description: string | undefined;
   events = new AttributeParserEventEmitter();
   variableName!: string;
@@ -41,10 +43,10 @@ export class DateArgumentModel extends AttributeModel implements ArgumentModelTy
     return 1;
   }
 
-  parsedValueIsMissing(parser: Parser) {
+  parsedValueIsMissing(parser: Parser): boolean {
     return parser.context[this.key] === undefined;
   }
 
-  // tslint:disable-next-line:no-empty
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars,@typescript-eslint/no-empty-function
   preinitialize(parser: Parser): void {}
 }

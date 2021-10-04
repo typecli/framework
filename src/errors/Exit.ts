@@ -1,6 +1,6 @@
-import { BuiltinClass } from '@typescript-plus/builtin-class-decorator';
+import { Es5BuiltinClass } from '@typescript-plus/builtin-class-decorator';
 
-@BuiltinClass()
+@Es5BuiltinClass()
 export class Exit extends Error {
   constructor(public status: number, public exitMessage?: string) {
     super();

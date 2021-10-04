@@ -8,11 +8,11 @@ import { ContextSpec } from './ContextSpec';
 export class RunSpace {
   constructor(public options: RunSpaceOptions) {}
 
-  get throwsOnExit() {
+  get throwsOnExit(): boolean {
     return this.options.throwOnExit === true;
   }
 
-  exit(status = 0) {
+  exit(status = 0): void {
     if (this.throwsOnExit) {
       throw new Exit(status);
     } else {
@@ -20,13 +20,13 @@ export class RunSpace {
     }
   }
 
-  async run(contextClass: ContextClassType, args: string[]) {
+  async run(contextClass: ContextClassType, args: string[]): Promise<void> {
     WORLD.runSpaces.push(this);
     return this._run(WORLD.getContextSpecOfClass(contextClass), args)
       .then(() => {
         WORLD.runSpaces.pop();
       })
-      .catch(err => {
+      .catch((err) => {
         WORLD.runSpaces.pop();
         throw err;
       });
@@ -44,12 +44,12 @@ export class RunSpace {
   }
 
   private async _run(contextSpec: ContextSpec, args: string[]): Promise<void> {
-    const context = contextSpec.createInstance() as { [key: string]: () => any };
+    const context = contextSpec.createInstance() as { [key: string]: () => unknown };
     const parser = parseSync(context, args);
     const runMethod = contextSpec.runMethod;
     if (runMethod) {
       const runResult = context[runMethod.key]();
-      if (runResult !== undefined && typeof (runResult as { then?: any }).then === 'function') {
+      if (runResult !== undefined && typeof (runResult as { then?: unknown }).then === 'function') {
         return runResult as Promise<void>;
       }
       return Promise.resolve();
@@ -62,12 +62,12 @@ export class RunSpace {
   }
 
   private _runSync(contextSpec: ContextSpec, args: string[]): void {
-    const context = contextSpec.createInstance() as { [key: string]: () => any };
+    const context = contextSpec.createInstance() as { [key: string]: () => unknown };
     const parser = parseSync(context, args);
     const runMethod = contextSpec.runMethod;
     if (runMethod) {
       const runResult = context[runMethod.key]();
-      if (runResult !== undefined && typeof (runResult as { then?: any }).then === 'function') {
+      if (runResult !== undefined && typeof (runResult as { then?: unknown }).then === 'function') {
         throw new NotSynchronousRunnerMethodError();
       }
       return;

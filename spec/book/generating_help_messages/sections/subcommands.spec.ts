@@ -1,10 +1,5 @@
-// tslint:disable-next-line:no-implicit-dependencies
 import { capture } from '@typescript-plus/stream-capture';
 import { generateHelp, Help, Sub } from '../../../../src';
-
-// tslint:disable:member-ordering
-// tslint:disable:no-console
-// tslint:disable:max-classes-per-file
 
 @Help({ caption: 'Made with Sachinoka strawberry.' })
 class Strawberry {}
@@ -21,7 +16,7 @@ class Chocolat {}
 class Cake {}
 
 it(__filename, () => {
-  const captured = capture(process.stdout, buffer => {
+  const captured = capture(process.stdout, (buffer) => {
     console.log(generateHelp(Cake));
     return buffer.join('');
   });

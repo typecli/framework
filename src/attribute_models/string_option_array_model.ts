@@ -7,11 +7,10 @@ import { AttributeParserEventEmitter } from '../classes/EventEmitter';
 import { Parser } from '../classes/Parser';
 import { ATTRIBUTE_PARSER_EVENT } from '../events';
 
-// tslint:disable-next-line:no-empty-interface
 export interface StringOptionArrayModelOptions extends AttributeModelOptions_desc, AttributeModelOptions_name {}
 
 const PARSER_EVENTS = new AttributeParserEventEmitter<StringOptionArrayModel>();
-PARSER_EVENTS.on(ATTRIBUTE_PARSER_EVENT.INITIALIZE, event => {
+PARSER_EVENTS.on(ATTRIBUTE_PARSER_EVENT.INITIALIZE, (event) => {
   event.parser.context[event.model.key] = [];
 });
 
@@ -28,12 +27,10 @@ export class StringOptionArrayModel extends AttributeModel implements OptionArra
   }
 
   extractOptionAndStore(parser: Parser, name: string): number {
-    // tslint:disable-next-line:no-magic-numbers
     if (parser.cursor.left < 2) {
       throw new UndefinedOptionValueError(parser, this, name);
     }
     (parser.context[this.key] as string[]).push(parser.cursor.at(1) as string);
-    // tslint:disable-next-line:no-magic-numbers
     return 2;
   }
 
@@ -41,6 +38,6 @@ export class StringOptionArrayModel extends AttributeModel implements OptionArra
     return this.optionNames.indexOf(name) !== -1;
   }
 
-  // tslint:disable-next-line:no-empty
+  // eslint-disable-next-line @typescript-eslint/no-empty-function,@typescript-eslint/no-unused-vars
   preinitialize(parser: Parser): void {}
 }

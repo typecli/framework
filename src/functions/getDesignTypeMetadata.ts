@@ -1,9 +1,8 @@
-// tslint:disable-next-line:no-import-side-effect
 import 'reflect-metadata';
 
 export const getDesignTypeMetadata =
-  // tslint:disable-next-line:strict-boolean-expressions
   Reflect && Reflect.getMetadata
-    ? // tslint:disable-next-line:no-unsafe-any
-      (target: object, key: string) => Reflect.getMetadata('design:type', target, key)
-    : (target: object, key: string) => undefined;
+    ? // eslint-disable-next-line @typescript-eslint/ban-types
+      (target: object, key: string) => Reflect.getMetadata('design:type', target, key) as unknown
+    : // eslint-disable-next-line @typescript-eslint/ban-types,@typescript-eslint/no-unused-vars
+      (target: object, key: string) => undefined;

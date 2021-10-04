@@ -1,11 +1,6 @@
 import { Mixin } from '@typescript-plus/mixin-decorator';
-// tslint:disable-next-line:no-implicit-dependencies
 import { capture } from '@typescript-plus/stream-capture';
 import { Argument, IncludeSyntax, Option, Run, runSync } from '../../src';
-
-// tslint:disable:member-ordering
-// tslint:disable:no-console
-// tslint:disable:no-magic-numbers
 
 class Reused {
   @Argument()
@@ -15,7 +10,6 @@ class Reused {
   opt!: string;
 }
 
-// tslint:disable-next-line:max-classes-per-file
 @Mixin(Reused)
 @IncludeSyntax(Reused)
 class Command implements Reused {
@@ -29,7 +23,7 @@ class Command implements Reused {
 }
 
 it(__filename, () => {
-  const captured = capture(process.stdout, buffer => {
+  const captured = capture(process.stdout, (buffer) => {
     runSync(Command, ['--opt', 'opt', 'arg']);
     return buffer.join('');
   });

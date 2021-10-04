@@ -1,5 +1,6 @@
 import {
-  StringVariadicArgumentsModel, StringVariadicArgumentsModelOptions
+  StringVariadicArgumentsModel,
+  StringVariadicArgumentsModelOptions,
 } from '../attribute_models/string_variadic_arguments_model';
 import { ContextSpec } from '../classes/ContextSpec';
 import { UnknownAttributeTypeError } from '../errors';
@@ -8,7 +9,7 @@ import { WORLD } from '../world';
 
 export interface VariadicOptions {
   min?: number;
-  type?: any;
+  type?: unknown;
 }
 
 const addString = (contextSpec: ContextSpec, key: string, options: VariadicOptions) => {
@@ -19,12 +20,11 @@ const addString = (contextSpec: ContextSpec, key: string, options: VariadicOptio
 };
 
 export function Variadic(options?: VariadicOptions) {
-  return (target: PropertyDecoratorTargetType, propertyKey: string, descriptor?: PropertyDescriptor) => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  return (target: PropertyDecoratorTargetType, propertyKey: string, descriptor?: PropertyDescriptor): void => {
     const contextSpec = WORLD.getContextSpecOfClass(target.constructor as ContextClassType);
-    // tslint:disable-next-line:no-parameter-reassignment
     options = options ? options : {};
-    // tslint:disable-next-line:strict-boolean-expressions
-    const type = options.type || String;
+    const type: unknown = options.type || String;
     switch (type) {
       case String:
         addString(contextSpec, propertyKey, options);

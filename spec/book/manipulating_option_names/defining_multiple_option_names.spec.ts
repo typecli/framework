@@ -1,9 +1,5 @@
-// tslint:disable-next-line:no-implicit-dependencies
 import { capture } from '@typescript-plus/stream-capture';
 import { Option, parseSync } from '../../../src';
-
-// tslint:disable:member-ordering
-// tslint:disable:no-console
 
 class Args {
   @Option({ name: ['-f', '--file'] })
@@ -11,7 +7,7 @@ class Args {
 }
 
 it('Book - Manipulating Option Names - Defining Multiple Option Names', () => {
-  const captured = capture(process.stdout, buffer => {
+  const captured = capture(process.stdout, (buffer) => {
     const args = new Args();
     parseSync(args, ['-f', 'foo.json']);
     console.log(args.file);

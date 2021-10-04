@@ -1,10 +1,5 @@
-// tslint:disable-next-line:no-implicit-dependencies
 import { capture } from '@typescript-plus/stream-capture';
 import { Argument, Option, Run, runSync } from '../../src';
-
-// tslint:disable:max-classes-per-file
-// tslint:disable:member-ordering
-// tslint:disable:no-console
 
 class HelloGoodbye {
   @Option() bye?: boolean;
@@ -21,7 +16,7 @@ class HelloGoodbye {
 }
 
 it('Book - Manipulating Option Names - Defining Multiple Option Names', () => {
-  const captured = capture(process.stdout, buffer => {
+  const captured = capture(process.stdout, (buffer) => {
     runSync(HelloGoodbye, ['world']);
     runSync(HelloGoodbye, ['--bye', 'world']);
     return buffer.join('');

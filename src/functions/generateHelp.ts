@@ -7,8 +7,6 @@ import { ContextSpec } from '../classes/ContextSpec';
 import { ContextClassType } from '../types';
 import { WORLD } from '../world';
 
-// tslint:disable:max-classes-per-file
-
 class HeadAndBody<T extends ArgumentModelType | OptionModelType | OptionArrayModelType> {
   constructor(public model: T, public head: string, public body: string) {}
 
@@ -28,18 +26,18 @@ class HeadsAndBodies<T extends ArgumentModelType | OptionModelType | OptionArray
 
   @Memoize()
   get maxHeadLength() {
-    return Math.max(...this.data.map(e => Math.max(...e.headLines.map(e2 => e2.length))));
+    return Math.max(...this.data.map((e) => Math.max(...e.headLines.map((e2) => e2.length))));
   }
 
   render() {
     const buf: string[] = [];
     const sorted = this.data.sort((a, b) => a.head.localeCompare(b.head));
-    sorted.forEach(hnb => {
+    sorted.forEach((hnb) => {
       const headLines = hnb.headLines.slice();
       const bodyLines = hnb.bodyLines.slice();
-      const defaultValue = (hnb.model as { defaultValue: any }).defaultValue;
+      const defaultValue = (hnb.model as { defaultValue: unknown }).defaultValue;
       if (defaultValue !== undefined) {
-        bodyLines.push(`(default: ${defaultValue})`);
+        bodyLines.push(`(default: ${defaultValue as string})`);
       }
       const maxLines = Math.max(headLines.length, bodyLines.length);
       for (let i = 0; i < maxLines; ++i) {
@@ -68,7 +66,7 @@ class Builder {
   @Memoize()
   get argumentsContent() {
     const list = new HeadsAndBodies();
-    this.contextSpec.arguments.forEach(arg => {
+    this.contextSpec.arguments.forEach((arg) => {
       const desc = arg.description;
       if (desc !== undefined) {
         const head = arg.variableName;
@@ -97,17 +95,17 @@ class Builder {
 
   @Memoize()
   get optionIsOptional() {
-    return !this.contextSpec.options.every(e => (e.options as AttributeModelOptions_required).required === true);
+    return !this.contextSpec.options.every((e) => (e.options as AttributeModelOptions_required).required === true);
   }
 
   @Memoize()
   get optionsContent() {
     const list = new HeadsAndBodies();
-    this.contextSpec.options.forEach(option => {
+    this.contextSpec.options.forEach((option) => {
       const desc = option.description;
       if (desc !== undefined) {
         let head = option.optionNames.sort().join(', ');
-        const negatedOptionNames = ((option as unknown) as { negatedOptionNames: string[] | undefined })
+        const negatedOptionNames = (option as unknown as { negatedOptionNames: string[] | undefined })
           .negatedOptionNames;
         if (negatedOptionNames !== undefined && negatedOptionNames.length > 0) {
           head = `${head} (not: ${negatedOptionNames.join(', ')})`;
@@ -124,11 +122,11 @@ class Builder {
     const context = WORLD.contextSpecs.get(this.contextSpec.klass);
     if (context) {
       const sorted = context.subspecs
-        .filter(e => e.caption !== undefined)
+        .filter((e) => e.caption !== undefined)
         .sort((a, b) => a.commandName.localeCompare(b.commandName));
-      const maxHeadLength = Math.max(...sorted.map(e => e.commandName.length));
-      sorted.forEach(e => {
-        buf.push(`  ${e.commandName.padEnd(maxHeadLength)}  ${e.caption}`);
+      const maxHeadLength = Math.max(...sorted.map((e) => e.commandName.length));
+      sorted.forEach((e) => {
+        buf.push(`  ${e.commandName.padEnd(maxHeadLength)}  ${e.caption as string}`);
       });
     }
     return buf.join('\n');
@@ -176,7 +174,7 @@ class Builder {
         buf.push('OPTIONS');
       }
     }
-    this.contextSpec.arguments.forEach(e => {
+    this.contextSpec.arguments.forEach((e) => {
       if ((e.options as AttributeModelOptions_required).required) {
         buf.push(e.variableName);
       } else {
@@ -196,7 +194,6 @@ class Builder {
           buf.push(`${variadicName}${index + 1}`);
         }
       }
-      // tslint:disable-next-line:no-magic-numbers
       buf.push(`[${variadicName}${index + 1} ${variadicName}${index + 2}...]`);
     }
     const terminator = this.contextSpec.terminator;
@@ -207,6 +204,6 @@ class Builder {
   }
 }
 
-export function generateHelp(contextClass: ContextClassType) {
+export function generateHelp(contextClass: ContextClassType): string {
   return Builder.build(WORLD.getContextSpecOfClass(contextClass)).text;
 }

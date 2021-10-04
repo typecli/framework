@@ -7,7 +7,7 @@ import { WORLD } from '../world';
 export interface OptionsOptions {
   names?: string[];
   required?: boolean;
-  type?: any;
+  type?: unknown;
 }
 
 const addString = (contextSpec: ContextSpec, key: string, options: OptionsOptions) => {
@@ -17,10 +17,10 @@ const addString = (contextSpec: ContextSpec, key: string, options: OptionsOption
   contextSpec.setOptionModel(model);
 };
 
-export function Options(type: any, options?: OptionsOptions) {
-  return (target: PropertyDecoratorTargetType, propertyKey: string, descriptor?: PropertyDescriptor) => {
+export function Options(type: unknown, options?: OptionsOptions) {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  return (target: PropertyDecoratorTargetType, propertyKey: string, descriptor?: PropertyDescriptor): void => {
     const contextSpec = WORLD.getContextSpecOfClass(target.constructor as ContextClassType);
-    // tslint:disable-next-line:no-parameter-reassignment
     options = options ? options : {};
     switch (type) {
       case String:

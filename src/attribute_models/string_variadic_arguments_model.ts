@@ -6,13 +6,14 @@ import { AttributeParserEventEmitter } from '../classes/EventEmitter';
 import { Parser } from '../classes/Parser';
 import { ATTRIBUTE_PARSER_EVENT } from '../events';
 
-// tslint:disable-next-line:no-empty-interface
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface StringVariadicArgumentsModelOptions extends AttributeModelOptions_min {}
 
 const PARSER_EVENTS = new AttributeParserEventEmitter<StringVariadicArgumentsModel>();
-PARSER_EVENTS.on(ATTRIBUTE_PARSER_EVENT.INITIALIZE, event => {
+PARSER_EVENTS.on(ATTRIBUTE_PARSER_EVENT.INITIALIZE, (event) => {
   event.parser.context[event.model.key] = [];
-}).on(ATTRIBUTE_PARSER_EVENT.VALIDATE, event => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+}).on(ATTRIBUTE_PARSER_EVENT.VALIDATE, (event) => {
   //
 });
 
@@ -33,6 +34,6 @@ export class StringVariadicArgumentsModel extends AttributeModel implements Vari
     return 1;
   }
 
-  // tslint:disable-next-line:no-empty
+  // eslint-disable-next-line @typescript-eslint/no-empty-function,@typescript-eslint/no-unused-vars
   preinitialize(parser: Parser): void {}
 }

@@ -1,11 +1,10 @@
-// tslint:disable:max-classes-per-file
-import { BuiltinClass } from '@typescript-plus/builtin-class-decorator';
+import { Es5BuiltinClass } from '@typescript-plus/builtin-class-decorator';
 import { ArgumentModelType, AttributeModel, OptionArrayModelType, OptionModelType } from './classes/AttributeModel';
 import { ContextSpec } from './classes/ContextSpec';
 import { Parser } from './classes/Parser';
 import { ClassDecoratorTargetType } from './types';
 
-@BuiltinClass()
+@Es5BuiltinClass()
 export abstract class ThisIsBugError extends Error {
   constructor() {
     super('This is an unknown bug. Please report to https://github.com/typecli/framework/issues.');
@@ -14,7 +13,7 @@ export abstract class ThisIsBugError extends Error {
 
 export class MethodMustNotBeCalled extends ThisIsBugError {}
 
-@BuiltinClass()
+@Es5BuiltinClass()
 export abstract class ParserError extends Error {
   constructor(public parser: Parser, message?: string) {
     super(message);
@@ -32,7 +31,7 @@ export abstract class MissingAttributeError<M extends AttributeModel> extends Pa
     super(parser);
   }
 
-  get message() {
+  get message(): string {
     return `Missing :`;
   }
 }
@@ -42,7 +41,7 @@ export class MissingArgumentError<M extends ArgumentModelType> extends MissingAt
     super(parser, model);
   }
 
-  get message() {
+  get message(): string {
     return `Missing argument: ${this.model.variableName}`;
   }
 }
@@ -52,7 +51,7 @@ export class MissingOptionError<M extends OptionModelType> extends MissingAttrib
     super(parser, model);
   }
 
-  get message() {
+  get message(): string {
     return `Missing option: ${this.model.optionNames[0]}`;
   }
 }
@@ -62,7 +61,7 @@ export class NoSubcommandError extends ParserError {
     super(
       parser,
       `Specify subcommand: ${contextSpec.subspecs
-        .map(e => e.commandName)
+        .map((e) => e.commandName)
         .sort()
         .join(', ')}`
     );
@@ -80,7 +79,7 @@ export class UndefinedArgumentValueError<M extends ArgumentModelType> extends Un
     super(parser, model);
   }
 
-  get message() {
+  get message(): string {
     return `Undefined argument: ${this.attributeModel.variableName}`;
   }
 }
@@ -111,9 +110,9 @@ export class UnknownOptionError extends ParserError {
   }
 }
 
-@BuiltinClass()
+@Es5BuiltinClass()
 export class UnknownAttributeTypeError extends Error {
-  constructor(target: ClassDecoratorTargetType, key: string, type: any) {
-    super(`Unknown attribute type: ${type} (${key} in ${target})`);
+  constructor(target: ClassDecoratorTargetType, key: string, type: unknown) {
+    super(`Unknown attribute type: ${type as string} (${key} in ${target as unknown as string})`);
   }
 }

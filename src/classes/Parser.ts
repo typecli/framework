@@ -18,34 +18,35 @@ export class Parser {
   }
 
   @Memoize()
-  get ramainingArguments() {
+  get ramainingArguments(): ArgumentModelType[] {
     return Array.from(this.contextSpec.arguments.values());
   }
 
-  callOptionHandler(option: OptionModelType | OptionArrayModelType) {
+  callOptionHandler(option: OptionModelType | OptionArrayModelType): void {
     const method = this.contextSpec.handlerMethods.get(option.key);
     if (method !== undefined) {
       method.call(this.context);
     }
   }
 
-  initializeAttributes() {
-    this.contextSpec.attributeModels.forEach(attribute => {
+  initializeAttributes(): void {
+    this.contextSpec.attributeModels.forEach((attribute) => {
       attribute.emitParserEvent(ATTRIBUTE_PARSER_EVENT.BEFORE_INITIALIZE, this);
     });
-    this.contextSpec.attributeModels.forEach(attribute => {
+    this.contextSpec.attributeModels.forEach((attribute) => {
       attribute.emitParserEvent(ATTRIBUTE_PARSER_EVENT.INITIALIZE, this);
     });
-    this.contextSpec.attributeModels.forEach(attribute => {
+    this.contextSpec.attributeModels.forEach((attribute) => {
       attribute.emitParserEvent(ATTRIBUTE_PARSER_EVENT.AFTER_INITIALIZE, this);
     });
   }
 
-  async parse() {
+  parse(): Promise<void> {
     this.parseSync();
+    return Promise.resolve();
   }
 
-  parseArgs() {
+  parseArgs(): void {
     for (
       let arg = this.cursor.at(0);
       arg !== undefined && !this.terminated && this.subcontextSpec === undefined;
@@ -55,7 +56,7 @@ export class Parser {
     }
   }
 
-  parseArgument(arg: string) {
+  parseArgument(arg: string): void {
     const model = this.ramainingArguments.shift();
     if (model) {
       this.parseNamedArgument(model);
@@ -64,8 +65,8 @@ export class Parser {
     }
   }
 
-  parseLongOption(arg: string) {
-    const parsed = this.contextSpec.options.find(option => {
+  parseLongOption(arg: string): void {
+    const parsed = this.contextSpec.options.find((option) => {
       if (!option.optionNameMatches(arg)) {
         return false;
       }
@@ -78,11 +79,12 @@ export class Parser {
     }
   }
 
-  parseNamedArgument(model: ArgumentModelType) {
+  parseNamedArgument(model: ArgumentModelType): void {
     this.cursor.next(model.extractArgumentAndStore(this));
   }
 
-  parseNamelessArgument(arg: string) {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  parseNamelessArgument(arg: string): void {
     const model = this.contextSpec.variadicArguments;
     if (model) {
       this.cursor.next(model.extractArgumentAndStore(this));
@@ -91,7 +93,7 @@ export class Parser {
     }
   }
 
-  parseNext(arg: string) {
+  parseNext(arg: string): void {
     if (this.parseTerminator(arg)) {
       //
     } else if (this.parseSubcontextSpecs(arg)) {
@@ -105,14 +107,14 @@ export class Parser {
     }
   }
 
-  parseShortOption(arg: string) {
+  parseShortOption(arg: string): void {
     const names = arg.slice(1).split('');
     let parameterized: OptionModelType | OptionArrayModelType | undefined;
     let parameterizedName: string | undefined;
     let size = 0;
-    names.forEach(name => {
+    names.forEach((name) => {
       const dashedName = `-${name}`;
-      const resolved = this.contextSpec.options.some(option => {
+      const resolved = this.contextSpec.options.some((option) => {
         if (!option.optionNameMatches(dashedName)) {
           return false;
         }
@@ -140,8 +142,8 @@ export class Parser {
     this.cursor.next(size);
   }
 
-  parseSubcontextSpecs(arg: string) {
-    const found = this.contextSpec.subspecs.find(e => e.commandName === arg);
+  parseSubcontextSpecs(arg: string): boolean {
+    const found = this.contextSpec.subspecs.find((e) => e.commandName === arg);
     if (found) {
       this.subcontextSpec = found;
       this.cursor.next(1);
@@ -150,13 +152,13 @@ export class Parser {
     return false;
   }
 
-  parseSync() {
+  parseSync(): void {
     this.initializeAttributes();
     this.parseArgs();
     this.validate();
   }
 
-  parseTerminator(arg: string) {
+  parseTerminator(arg: string): boolean {
     const terminator = this.contextSpec.terminator;
     if (terminator) {
       if (terminator.terminatorKeywordMatches(arg)) {
@@ -168,17 +170,17 @@ export class Parser {
     return false;
   }
 
-  validate() {
+  validate(): void {
     if (this.subcontextSpec === undefined && this.contextSpec.subspecs.length > 0) {
       throw new NoSubcommandError(this, this.contextSpec);
     }
-    this.contextSpec.attributeModels.forEach(v => {
+    this.contextSpec.attributeModels.forEach((v) => {
       v.emitParserEvent(ATTRIBUTE_PARSER_EVENT.BEFORE_VALIDATE, this);
     });
-    this.contextSpec.attributeModels.forEach(v => {
+    this.contextSpec.attributeModels.forEach((v) => {
       v.emitParserEvent(ATTRIBUTE_PARSER_EVENT.VALIDATE, this);
     });
-    this.contextSpec.attributeModels.forEach(v => {
+    this.contextSpec.attributeModels.forEach((v) => {
       v.emitParserEvent(ATTRIBUTE_PARSER_EVENT.AFTER_INITIALIZE, this);
     });
   }

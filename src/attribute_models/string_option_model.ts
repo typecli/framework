@@ -3,7 +3,10 @@ import { UndefinedOptionValueError } from '../';
 import { AttributeModel_defaultValue, AttributeModel_description } from '../classes/attribute_model/mixins';
 import { AttributeModel, AttributeModel_optionNames, OptionModelType } from '../classes/AttributeModel';
 import {
-  AttributeModelOptions_default, AttributeModelOptions_desc, AttributeModelOptions_name, AttributeModelOptions_required
+  AttributeModelOptions_default,
+  AttributeModelOptions_desc,
+  AttributeModelOptions_name,
+  AttributeModelOptions_required,
 } from '../classes/AttributeModelOptions';
 import { AttributeParserEventEmitter } from '../classes/EventEmitter';
 import { Parser } from '../classes/Parser';
@@ -17,9 +20,9 @@ export interface StringOptionModelOptions
     AttributeModelOptions_name {}
 
 const PARSER_EVENTS = new AttributeParserEventEmitter<StringOptionModel>();
-PARSER_EVENTS.on(ATTRIBUTE_PARSER_EVENT.INITIALIZE, event => {
+PARSER_EVENTS.on(ATTRIBUTE_PARSER_EVENT.INITIALIZE, (event) => {
   event.parser.context[event.model.key] = event.model.defaultValue;
-}).on(ATTRIBUTE_PARSER_EVENT.VALIDATE, event => {
+}).on(ATTRIBUTE_PARSER_EVENT.VALIDATE, (event) => {
   if (event.model.options.required) {
     validateOptionRequired(event.parser, event.model);
   }
@@ -30,7 +33,7 @@ PARSER_EVENTS.on(ATTRIBUTE_PARSER_EVENT.INITIALIZE, event => {
 @Mixin(AttributeModel_optionNames)
 export class StringOptionModel extends AttributeModel implements OptionModelType {
   classEvents: AttributeParserEventEmitter<StringOptionModel> = PARSER_EVENTS;
-  defaultValue: any;
+  defaultValue: unknown;
   description: string | undefined;
   events = new AttributeParserEventEmitter();
   hasOptionParameter = true;
@@ -41,12 +44,10 @@ export class StringOptionModel extends AttributeModel implements OptionModelType
   }
 
   extractOptionAndStore(parser: Parser, name: string): number {
-    // tslint:disable-next-line:no-magic-numbers
     if (parser.cursor.left < 2) {
       throw new UndefinedOptionValueError(parser, this, name);
     }
     parser.context[this.key] = parser.cursor.at(1) as string;
-    // tslint:disable-next-line:no-magic-numbers
     return 2;
   }
 
@@ -54,10 +55,10 @@ export class StringOptionModel extends AttributeModel implements OptionModelType
     return this.optionNames.indexOf(name) !== -1;
   }
 
-  parsedValueIsMissing(parser: Parser) {
+  parsedValueIsMissing(parser: Parser): boolean {
     return parser.context[this.key] === undefined;
   }
 
-  // tslint:disable-next-line:no-empty
+  // eslint-disable-next-line @typescript-eslint/no-empty-function,@typescript-eslint/no-unused-vars
   preinitialize(parser: Parser): void {}
 }

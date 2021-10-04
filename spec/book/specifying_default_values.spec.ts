@@ -1,10 +1,5 @@
-// tslint:disable-next-line:no-implicit-dependencies
 import { capture } from '@typescript-plus/stream-capture';
 import { Option, Run, runSync } from '../../src';
-
-// tslint:disable:member-ordering
-// tslint:disable:no-console
-// tslint:disable:no-magic-numbers
 
 class Smile {
   @Option({ default: ':)' })
@@ -17,7 +12,7 @@ class Smile {
 }
 
 it(__filename, () => {
-  const captured = capture(process.stdout, buffer => {
+  const captured = capture(process.stdout, (buffer) => {
     runSync(Smile);
     return buffer.join('');
   });

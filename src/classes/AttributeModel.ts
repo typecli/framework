@@ -2,19 +2,23 @@ import { Memoize } from '@typescript-plus/fast-memoize-decorator';
 import { kebab } from 'case';
 import { ATTRIBUTE_PARSER_EVENT } from '../events';
 import {
-  AttributeModel_extractArgumentAndStore, AttributeModel_extractOptionAndStore, AttributeModel_hasOptionParameter,
-  AttributeModel_optionNameMatches, AttributeModel_terminatorKeywordMatches, AttributeModel_terminatorKeywords
+  AttributeModel_extractArgumentAndStore,
+  AttributeModel_extractOptionAndStore,
+  AttributeModel_hasOptionParameter,
+  AttributeModel_optionNameMatches,
+  AttributeModel_terminatorKeywordMatches,
+  AttributeModel_terminatorKeywords,
 } from './attribute_model/interfaces';
 import {
-  AttributeModel_defaultValue, AttributeModel_description, AttributeModel_minimumElementCount,
-  AttributeModel_variableName
+  AttributeModel_defaultValue,
+  AttributeModel_description,
+  AttributeModel_minimumElementCount,
+  AttributeModel_variableName,
 } from './attribute_model/mixins';
 import { AttributeModelOptions, AttributeModelOptions_name } from './AttributeModelOptions';
 import { AttributeParserEvent } from './Event';
 import { AttributeParserEventEmitter } from './EventEmitter';
 import { Parser } from './Parser';
-
-// tslint:disable:max-classes-per-file
 
 export abstract class AttributeModel {
   abstract classEvents: AttributeParserEventEmitter<AttributeModel>;
@@ -23,8 +27,9 @@ export abstract class AttributeModel {
 
   constructor(public key: string) {}
 
-  emitParserEvent(event: ATTRIBUTE_PARSER_EVENT, parser: Parser, ...args: any[]) {
-    [this.events, this.classEvents].forEach(events => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  emitParserEvent(event: ATTRIBUTE_PARSER_EVENT, parser: Parser, ...args: unknown[]): void {
+    [this.events, this.classEvents].forEach((events) => {
       events.emit(new AttributeParserEvent(event, this, parser));
     });
   }
@@ -32,13 +37,12 @@ export abstract class AttributeModel {
   abstract preinitialize(parser: Parser): void;
 }
 
-// tslint:disable-next-line:class-name
 export abstract class AttributeModel_optionNames {
   abstract key: string;
   abstract options: AttributeModelOptions_name;
 
   @Memoize()
-  get optionNames() {
+  get optionNames(): string[] {
     const names = this.options.name;
     if (Array.isArray(names)) {
       return names;

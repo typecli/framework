@@ -3,7 +3,9 @@ import { UndefinedOptionValueError } from '../';
 import { AttributeModel_defaultValue } from '../classes/attribute_model/mixins';
 import { AttributeModel, AttributeModel_optionNames, OptionModelType } from '../classes/AttributeModel';
 import {
-  AttributeModelOptions_default, AttributeModelOptions_desc, AttributeModelOptions_name
+  AttributeModelOptions_default,
+  AttributeModelOptions_desc,
+  AttributeModelOptions_name,
 } from '../classes/AttributeModelOptions';
 import { AttributeParserEventEmitter } from '../classes/EventEmitter';
 import { Parser } from '../classes/Parser';
@@ -15,7 +17,6 @@ const PARSER_EVENTS = new AttributeParserEventEmitter<DateOptionModel>();
 //   }
 // });
 
-// tslint:disable-next-line:no-empty-interface
 export interface DateOptionModelOptions
   extends AttributeModelOptions_default,
     AttributeModelOptions_desc,
@@ -25,7 +26,7 @@ export interface DateOptionModelOptions
 @Mixin(AttributeModel_optionNames)
 export class DateOptionModel extends AttributeModel implements OptionModelType {
   classEvents: AttributeParserEventEmitter<DateOptionModel> = PARSER_EVENTS;
-  defaultValue: any;
+  defaultValue: unknown;
   description: string | undefined;
   events = new AttributeParserEventEmitter();
   hasOptionParameter = true;
@@ -36,12 +37,10 @@ export class DateOptionModel extends AttributeModel implements OptionModelType {
   }
 
   extractOptionAndStore(parser: Parser, name: string): number {
-    // tslint:disable-next-line:no-magic-numbers
     if (parser.cursor.left < 2) {
       throw new UndefinedOptionValueError(parser, this, name);
     }
     parser.context[this.key] = new Date(parser.cursor.at(1) as string);
-    // tslint:disable-next-line:no-magic-numbers
     return 2;
   }
 
@@ -49,6 +48,6 @@ export class DateOptionModel extends AttributeModel implements OptionModelType {
     return this.optionNames.indexOf(name) !== -1;
   }
 
-  // tslint:disable-next-line:no-empty
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars,@typescript-eslint/no-empty-function
   preinitialize(parser: Parser): void {}
 }

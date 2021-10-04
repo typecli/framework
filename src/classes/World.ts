@@ -8,7 +8,7 @@ export class World {
   contextSpecs = new FunctionalMap<ContextClassType, ContextSpec>();
   runSpaces: RunSpace[] = [];
 
-  getContextSpecOfClass(klass: ContextClassType) {
+  getContextSpecOfClass(klass: ContextClassType): ContextSpec {
     let spec = this.contextSpecs.get(klass);
     if (spec === undefined) {
       spec = new ContextSpec(klass);

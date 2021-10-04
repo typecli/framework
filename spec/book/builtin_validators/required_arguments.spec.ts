@@ -1,6 +1,5 @@
-// tslint:disable-next-line:no-implicit-dependencies
 import { shouldThrow } from '@typescript-plus/should-throw';
-import { Argument, MissingArgumentError, MissingAttributeError, parse } from '../../../src';
+import { Argument, MissingArgumentError, parse } from '../../../src';
 
 class Compile {
   @Argument({ required: true })
@@ -12,10 +11,10 @@ it('Book - Builtin Validators - Required Arguments', async () => {
   try {
     await shouldThrow(
       MissingArgumentError,
-      async () => parse(new Compile(), []),
-      (e: MissingAttributeError<any>) => {
-        expect(e.message).toEqual('Missing argument: SOURCE_FILE');
-      }
+      async () => {
+        await parse(new Compile(), []);
+      },
+      (e) => Promise.resolve(expect(e.message).toEqual('Missing argument: SOURCE_FILE'))
     );
   } catch (err) {
     error = err;

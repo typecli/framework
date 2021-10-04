@@ -1,6 +1,6 @@
-import { BuiltinClass } from '@typescript-plus/builtin-class-decorator';
+import { Es5BuiltinClass } from '@typescript-plus/builtin-class-decorator';
 
-@BuiltinClass()
+@Es5BuiltinClass()
 export class NotSynchronousRunnerMethodError extends Error {
   constructor() {
     super('Asynchronous runner method was called in synchronous context.');

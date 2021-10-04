@@ -1,4 +1,4 @@
-export function wrapByArray<T>(v: T | T[] | undefined) {
+export function wrapByArray<T>(v: T | T[] | undefined): T[] {
   if (v instanceof Array) {
     return v;
   }

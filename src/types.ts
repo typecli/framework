@@ -1,14 +1,10 @@
-// tslint:disable:interface-over-type-literal
-
-// export type AttributeAccessorType = { [key: string]: any };
-// export type AttributeAccessorClassType = ConstructorType;
-
 export type ArgumentValueType = string;
 export type OptionValueType = boolean | string;
 export type ListOptionValueType = string[];
 export type NamedParsedValueType = ArgumentValueType | OptionValueType | ListOptionValueType;
 
 export type ContextType = {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [key: string]: any;
   constructor: FunctionType;
 };
@@ -16,7 +12,7 @@ export type ContextClassType = ConstructorType;
 
 export type ClassDecoratorTargetType = ConstructorType;
 export type PropertyDecoratorTargetType = { constructor: FunctionType };
-export type InjectionTargetType = { [key: string]: any };
+export type InjectionTargetType = { [key: string]: unknown };
 
 export type ClassDecoratorType = <T extends ClassDecoratorTargetType>(constructor: T) => T;
 export type PropertyDecoratorType = (
@@ -30,9 +26,12 @@ export type MethodDecoratorType = (
   descriptor: PropertyDescriptor
 ) => void;
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type ConstructorType = { new (...args: any[]): any };
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type PrototypeOwnerType = { prototype: any };
 export type PrototypeOwnerConstructorType = ConstructorType & PrototypeOwnerType;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type AbstructConstructorType = FunctionType & { prototype: any };
-// tslint:disable-next-line:ban-types
+// eslint-disable-next-line @typescript-eslint/ban-types
 export type FunctionType = Function;

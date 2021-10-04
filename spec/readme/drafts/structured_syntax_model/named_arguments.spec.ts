@@ -1,7 +1,5 @@
 import { Argument, Option, parseSync } from '../../../../src';
 
-// tslint:disable:member-ordering
-
 class Args {
   @Option() s!: string;
   @Option() b!: boolean;

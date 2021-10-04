@@ -1,17 +1,12 @@
-// tslint:disable-next-line:no-implicit-dependencies
 import { capture } from '@typescript-plus/stream-capture';
 import { Argument, Run, runSync, Sub } from '../../../src';
-
-// tslint:disable:member-ordering
-// tslint:disable:no-console
-// tslint:disable:max-classes-per-file
 
 class Hello {
   @Argument() face?: string;
 
   @Run()
   hello() {
-    console.log(`Hello ${this.face}`);
+    console.log(`Hello ${this.face as string}`);
   }
 }
 
@@ -20,7 +15,7 @@ class Bye {
 
   @Run()
   bye() {
-    console.log(`Goodbye ${this.face}`);
+    console.log(`Goodbye ${this.face as string}`);
   }
 }
 
@@ -29,7 +24,7 @@ class Bye {
 class Main {}
 
 it('Book - Describing Subcommands', () => {
-  const captured = capture(process.stdout, buffer => {
+  const captured = capture(process.stdout, (buffer) => {
     runSync(Main, ['hello', ':)']);
     runSync(Main, ['bye', ':(']);
     return buffer.join('');

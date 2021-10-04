@@ -9,7 +9,6 @@ export type FunctionalMapCallbackWithIndex<K, V, RESULT> = (
 ) => RESULT;
 
 export class FunctionalMap<K, V> {
-  // tslint:disable-next-line:variable-name
   _map: Map<K, V>;
 
   constructor();
@@ -31,7 +30,7 @@ export class FunctionalMap<K, V> {
     return this._map.entries();
   }
 
-  every(predicate: FunctionalMapCallback<K, V, any>): boolean {
+  every(predicate: FunctionalMapCallback<K, V, unknown>): boolean {
     const it = new IterableIterate<[K, V], boolean>(this.entries());
     return it.iterate((item, index, breaker) => {
       const [k, v] = item;
@@ -41,10 +40,10 @@ export class FunctionalMap<K, V> {
     }, true);
   }
 
-  filter(predicate: FunctionalMapCallback<K, V, any>): FunctionalMap<K, V> {
+  filter(predicate: FunctionalMapCallback<K, V, unknown>): FunctionalMap<K, V> {
     const result = new FunctionalMap<K, V>();
-    const it = new IterableIterate<[K, V], any>(this.entries());
-    it.iterate((item, index) => {
+    const it = new IterableIterate<[K, V], unknown>(this.entries());
+    it.iterate((item) => {
       const [k, v] = item;
       if (predicate(v, k, this)) {
         result.set(k, v);
@@ -53,7 +52,7 @@ export class FunctionalMap<K, V> {
     return result;
   }
 
-  find(predicate: FunctionalMapCallback<K, V, any>): V | undefined {
+  find(predicate: FunctionalMapCallback<K, V, unknown>): V | undefined {
     const it = new IterableIterate<[K, V], V | undefined>(this.entries());
     return it.iterate((item, index, breaker) => {
       const [k, v] = item;
@@ -63,8 +62,8 @@ export class FunctionalMap<K, V> {
     }, undefined);
   }
 
-  forEach(callbackfn: (value: V, key: K, map: FunctionalMap<K, V>) => void, thisArg?: any): void {
-    this._map.forEach((value, key, map) => {
+  forEach(callbackfn: (value: V, key: K, map: FunctionalMap<K, V>) => void, thisArg?: unknown): void {
+    this._map.forEach((value, key) => {
       callbackfn(value, key, this);
     }, thisArg);
   }
@@ -78,7 +77,7 @@ export class FunctionalMap<K, V> {
     return this;
   }
 
-  some(predicate: FunctionalMapCallback<K, V, any>): boolean {
+  some(predicate: FunctionalMapCallback<K, V, unknown>): boolean {
     const it = new IterableIterate<[K, V], boolean>(this.entries());
     return it.iterate((item, index, breaker) => {
       const [k, v] = item;

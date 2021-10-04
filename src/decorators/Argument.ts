@@ -9,7 +9,7 @@ import { WORLD } from '../world';
 export interface ArgumentOptions {
   desc?: string;
   required?: boolean;
-  type?: any;
+  type?: unknown;
   variableName?: string;
 }
 
@@ -28,12 +28,11 @@ const addDate = (contextSpec: ContextSpec, key: string, options: ArgumentOptions
 };
 
 export function Argument(options?: ArgumentOptions) {
-  return (target: PropertyDecoratorTargetType, propertyKey: string, descriptor?: PropertyDescriptor) => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  return (target: PropertyDecoratorTargetType, propertyKey: string, descriptor?: PropertyDescriptor): void => {
     const contextSpec = WORLD.getContextSpecOfClass(target.constructor as ContextClassType);
-    // tslint:disable-next-line:no-parameter-reassignment
     options = options ? options : {};
-    // tslint:disable-next-line:strict-boolean-expressions
-    const type = options.type || getDesignTypeMetadata(target, propertyKey);
+    const type: unknown = options.type || getDesignTypeMetadata(target, propertyKey);
     switch (type) {
       case String:
         addString(contextSpec, propertyKey, options);

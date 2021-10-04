@@ -6,9 +6,9 @@ export function Handler(fn?: () => void) {
   return (
     target: PropertyDecoratorTargetType,
     propertyKey: string,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     descriptor?: PropertyDescriptor //TypedPropertyDescriptor<() => void>
-  ) => {
-    // tslint:disable-next-line:no-magic-numbers
+  ): void => {
     const targetKey = propertyKey.charAt(2).toLowerCase() + propertyKey.slice(3);
     WORLD.getContextSpecOfClass(target.constructor as ContextClassType).setHandlerMethod(
       new HandlerMethod(targetKey, fn ? fn : propertyKey)

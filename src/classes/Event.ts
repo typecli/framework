@@ -2,7 +2,7 @@ import { ATTRIBUTE_PARSER_EVENT } from '../events';
 import { AttributeModel } from './AttributeModel';
 import { Parser } from './Parser';
 
-// tslint:disable-next-line:no-empty-interface
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export interface Event<T> {
   name: string;
 }

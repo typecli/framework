@@ -3,18 +3,20 @@ import { Mixin } from '@typescript-plus/mixin-decorator';
 import { AttributeModel_defaultValue, AttributeModel_description } from '../classes/attribute_model/mixins';
 import { AttributeModel, AttributeModel_optionNames, OptionModelType } from '../classes/AttributeModel';
 import {
-  AttributeModelOptions_default, AttributeModelOptions_desc, AttributeModelOptions_name, AttributeModelOptions_not
+  AttributeModelOptions_default,
+  AttributeModelOptions_desc,
+  AttributeModelOptions_name,
+  AttributeModelOptions_not,
 } from '../classes/AttributeModelOptions';
 import { AttributeParserEventEmitter } from '../classes/EventEmitter';
 import { Parser } from '../classes/Parser';
 import { ATTRIBUTE_PARSER_EVENT } from '../events';
 
 const PARSER_EVENTS = new AttributeParserEventEmitter<BooleanOptionModel>();
-PARSER_EVENTS.on(ATTRIBUTE_PARSER_EVENT.INITIALIZE, event => {
+PARSER_EVENTS.on(ATTRIBUTE_PARSER_EVENT.INITIALIZE, (event) => {
   event.parser.context[event.model.key] = event.model.defaultValue;
 });
 
-// tslint:disable-next-line:no-empty-interface
 export interface BooleanOptionModelOptions
   extends AttributeModelOptions_default,
     AttributeModelOptions_name,
@@ -26,7 +28,7 @@ export interface BooleanOptionModelOptions
 @Mixin(AttributeModel_optionNames)
 export class BooleanOptionModel extends AttributeModel implements OptionModelType {
   classEvents: AttributeParserEventEmitter<BooleanOptionModel> = PARSER_EVENTS;
-  defaultValue: any;
+  defaultValue: unknown;
   description: string | undefined;
   events = new AttributeParserEventEmitter();
   hasOptionParameter = false;
@@ -37,7 +39,7 @@ export class BooleanOptionModel extends AttributeModel implements OptionModelTyp
   }
 
   @Memoize()
-  get negatedOptionNames() {
+  get negatedOptionNames(): string[] {
     const not = this.options.not;
     return Array.isArray(not) ? not : not === undefined ? [] : [not];
   }
@@ -51,6 +53,6 @@ export class BooleanOptionModel extends AttributeModel implements OptionModelTyp
     return this.optionNames.indexOf(name) !== -1 || this.negatedOptionNames.indexOf(name) !== -1;
   }
 
-  // tslint:disable-next-line:no-empty
+  // eslint-disable-next-line @typescript-eslint/no-empty-function,@typescript-eslint/no-unused-vars
   preinitialize(parser: Parser): void {}
 }

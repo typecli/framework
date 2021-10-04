@@ -10,8 +10,7 @@ export interface ShowHelpOptions {
 }
 
 export function ShowHelp(options?: ShowHelpOptions) {
-  return <T extends ClassDecoratorTargetType>(constructor: T) => {
-    // tslint:disable-next-line:no-parameter-reassignment
+  return <T extends ClassDecoratorTargetType>(constructor: T): T => {
     options = options ? options : {};
     const name: string[] = options.name === undefined ? ['--help'] : options.name;
     const desc: string = options.desc === undefined ? 'Show this help.' : options.desc;

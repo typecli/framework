@@ -3,15 +3,15 @@ import { Parser } from './Parser';
 export class ParserCursor {
   constructor(public parser: Parser, public index = 0) {}
 
-  get args() {
+  get args(): string[] {
     return this.parser.args;
   }
 
-  get left() {
+  get left(): number {
     return this.length - this.index;
   }
 
-  get length() {
+  get length(): number {
     return this.args.length;
   }
 
@@ -19,13 +19,13 @@ export class ParserCursor {
     return this.args[this.index + offset];
   }
 
-  next(size: number) {
+  next(size: number): string[] {
     const sliced = this.args.slice(this.index, this.index + size);
     this.index += size;
     return sliced;
   }
 
-  slice(start: number = 0) {
+  slice(start = 0): string[] {
     return this.args.slice(this.index + start);
   }
 }

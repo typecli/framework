@@ -1,7 +1,5 @@
 import { Option, parseSync } from '../../../../src';
 
-// tslint:disable:member-ordering
-
 class Color {
   @Option() r!: string;
   @Option() g!: string;

@@ -8,12 +8,12 @@ import { ClassDecoratorTargetType, ContextClassType, PropertyDecoratorTargetType
 import { WORLD } from '../world';
 
 export interface OptionOptions {
-  default?: any;
+  default?: unknown;
   desc?: string;
   name?: string | string[];
   not?: string | string[];
   required?: boolean;
-  type?: any;
+  type?: unknown;
 }
 
 const addString = (contextSpec: ContextSpec, key: string, options: OptionOptions) => {
@@ -38,12 +38,11 @@ const addDate = (contextSpec: ContextSpec, key: string, options: OptionOptions) 
 };
 
 export function Option(options?: OptionOptions) {
-  return (target: PropertyDecoratorTargetType, propertyKey: string, descriptor?: PropertyDescriptor) => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  return (target: PropertyDecoratorTargetType, propertyKey: string, descriptor?: PropertyDescriptor): void => {
     const contextSpec = WORLD.getContextSpecOfClass(target.constructor as ContextClassType);
-    // tslint:disable-next-line:no-parameter-reassignment
     options = options ? options : {};
-    // tslint:disable-next-line:strict-boolean-expressions
-    const type = options.type || getDesignTypeMetadata(target, propertyKey);
+    const type: unknown = options.type || getDesignTypeMetadata(target, propertyKey);
     switch (type) {
       case String:
         addString(contextSpec, propertyKey, options);

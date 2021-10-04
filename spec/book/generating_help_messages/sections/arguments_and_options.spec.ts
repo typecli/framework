@@ -1,14 +1,10 @@
-// tslint:disable-next-line:no-implicit-dependencies
 import { capture } from '@typescript-plus/stream-capture';
 import { Argument, generateHelp, Option } from '../../../../src';
-
-// tslint:disable:member-ordering
-// tslint:disable:no-console
 
 class Connect {
   @Argument({
     desc: "Server's hostname or IP address.",
-    required: true
+    required: true,
   })
   host!: string;
   @Option({ default: '4747', desc: 'Port number.' })
@@ -16,7 +12,7 @@ class Connect {
 }
 
 it(__filename, () => {
-  const captured = capture(process.stdout, buffer => {
+  const captured = capture(process.stdout, (buffer) => {
     console.log(generateHelp(Connect));
     return buffer.join('');
   });

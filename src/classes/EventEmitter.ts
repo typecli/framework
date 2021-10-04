@@ -1,23 +1,21 @@
-import * as EventEmitterImpl from 'events';
+import * as events from 'events';
 import { ATTRIBUTE_PARSER_EVENT } from '../events';
 import { AttributeModel } from './AttributeModel';
 import { AttributeParserEvent, Event } from './Event';
 
-// tslint:disable:max-classes-per-file
-
-export type EventListener<N extends string, E extends Event<N>> = (event: E, ...args: any[]) => void;
-export type EventListenerWrapper<N extends string, E extends Event<N>> = (event: E, ...args: any[]) => void;
-// tslint:disable-next-line:interface-over-type-literal
+export type EventListener<N extends string, E extends Event<N>> = (event: E, ...args: unknown[]) => void;
+export type EventListenerWrapper<N extends string, E extends Event<N>> = (event: E, ...args: unknown[]) => void;
+// eslint-disable-next-line @typescript-eslint/ban-types
 export type EventThisArgType = {};
 
 export class EventEmitter<N extends string, E extends Event<N>> {
-  emitter = new EventEmitterImpl();
-  listenerWrappers = new Map<any, Map<any, any[]>>();
+  emitter = new events.EventEmitter();
+  listenerWrappers = new Map<unknown, Map<unknown, unknown[]>>();
 
-  addListenerWrapper(event: N, listener: EventListener<N, E>, wrapper: EventListenerWrapper<N, E>) {
+  addListenerWrapper(event: N, listener: EventListener<N, E>, wrapper: EventListenerWrapper<N, E>): void {
     let listeners = this.listenerWrappers.get(event);
     if (!listeners) {
-      listeners = new Map<any, any[]>();
+      listeners = new Map<unknown, unknown[]>();
       this.listenerWrappers.set(event, listeners);
     }
     let wrappers = listeners.get(listener);
@@ -28,16 +26,17 @@ export class EventEmitter<N extends string, E extends Event<N>> {
     wrappers.push(wrapper);
   }
 
-  emit(event: E, ...args: any[]) {
+  emit(event: E, ...args: unknown[]): void {
     this.emitter.emit(event.name, event, ...args);
   }
 
-  off(event: N, listener: EventListener<N, E>) {
+  off(event: N, listener: EventListener<N, E>): void {
     this.removeListenerWrapper(event, listener);
   }
 
-  on(event: N, listener: EventListener<N, E>) {
-    const wrapper = (...args: [E, ...any[]]) => {
+  on(event: N, listener: EventListener<N, E>): this {
+    const wrapper = (...args: [E, ...unknown[]]) => {
+      // eslint-disable-next-line prefer-spread
       listener.apply(undefined, args);
     };
     this.emitter.on(event, wrapper);
@@ -45,8 +44,9 @@ export class EventEmitter<N extends string, E extends Event<N>> {
     return this;
   }
 
-  once(event: N, listener: EventListener<N, E>) {
-    const wrapper = (...args: [E, ...any[]]) => {
+  once(event: N, listener: EventListener<N, E>): this {
+    const wrapper = (...args: [E, ...unknown[]]) => {
+      // eslint-disable-next-line prefer-spread
       listener.apply(undefined, args);
     };
     this.emitter.once(event, wrapper);
@@ -54,12 +54,12 @@ export class EventEmitter<N extends string, E extends Event<N>> {
     return this;
   }
 
-  removeListenerWrapper(event: N, listener: EventListener<N, E>) {
+  removeListenerWrapper(event: N, listener: EventListener<N, E>): void {
     const listeners = this.listenerWrappers.get(event);
     if (listeners) {
       const wrappers = listeners.get(listener);
       if (wrappers) {
-        wrappers.forEach(e => {
+        wrappers.forEach((e) => {
           this.emitter.removeListener(event, e as EventListener<N, E>);
         });
       }

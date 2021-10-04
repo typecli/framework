@@ -1,37 +1,30 @@
-// tslint:disable-next-line:class-name
 export interface AttributeModelOptions_default {
-  default?: any;
+  default?: unknown;
 }
 
-// tslint:disable-next-line:class-name
 export interface AttributeModelOptions_desc {
   desc?: string;
 }
 
-// tslint:disable-next-line:class-name
 export interface AttributeModelOptions_name {
   name?: string | string[];
 }
 
-// tslint:disable-next-line:class-name
 export interface AttributeModelOptions_variableName {
   variableName?: string;
 }
 
-// tslint:disable-next-line:class-name
 export interface AttributeModelOptions_required {
   required?: boolean;
 }
 
-// tslint:disable-next-line:class-name
 export interface AttributeModelOptions_not {
   not?: string | string[];
 }
 
-// tslint:disable-next-line:class-name
 export interface AttributeModelOptions_min {
   min?: number;
 }
 
-// tslint:disable-next-line:no-empty-interface
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface AttributeModelOptions {}

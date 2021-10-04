@@ -2,7 +2,7 @@ import { AttributeModel, TerminatorModelType } from '../classes/AttributeModel';
 import { AttributeParserEventEmitter } from '../classes/EventEmitter';
 import { Parser } from '../classes/Parser';
 
-// tslint:disable-next-line:no-empty-interface
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface TerminatorModelOptions {}
 
 const PARSER_EVENTS = new AttributeParserEventEmitter<TerminatorModel>();
@@ -16,7 +16,7 @@ export class TerminatorModel extends AttributeModel implements TerminatorModelTy
     super(key);
   }
 
-  // tslint:disable-next-line:no-empty
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars,@typescript-eslint/no-empty-function
   preinitialize(parser: Parser): void {}
 
   terminatorKeywordMatches(word: string): boolean {

@@ -1,8 +1,5 @@
-// tslint:disable-next-line:no-implicit-dependencies
 import { shouldThrow } from '@typescript-plus/should-throw';
 import { NoSubcommandError, parse, Sub } from '../../src';
-
-// tslint:disable:max-classes-per-file
 
 class Subcommand1 {}
 
@@ -17,10 +14,10 @@ it(__filename, async () => {
   try {
     await shouldThrow(
       NoSubcommandError,
-      async () => parse(new Supercommand(), []),
-      (e: NoSubcommandError) => {
-        expect(e.message).toEqual('Specify subcommand: subcommand1, subcommand2');
-      }
+      async () => {
+        await parse(new Supercommand(), []);
+      },
+      (e) => Promise.resolve(expect(e.message).toEqual('Specify subcommand: subcommand1, subcommand2'))
     );
   } catch (err) {
     error = err;

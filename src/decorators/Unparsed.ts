@@ -3,7 +3,7 @@ import { ContextSpec } from '../classes/ContextSpec';
 import { ContextClassType, PropertyDecoratorTargetType } from '../types';
 import { WORLD } from '../world';
 
-// tslint:disable-next-line:no-empty-interface
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface UnparsedOptions {}
 
 const add = (contextSpec: ContextSpec, key: string, keywords: string[], options: UnparsedOptions) => {
@@ -14,9 +14,9 @@ const add = (contextSpec: ContextSpec, key: string, keywords: string[], options:
 };
 
 export function Unparsed(keywords: string[], options?: UnparsedOptions) {
-  return (target: PropertyDecoratorTargetType, propertyKey: string, descriptor?: PropertyDescriptor) => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  return (target: PropertyDecoratorTargetType, propertyKey: string, descriptor?: PropertyDescriptor): void => {
     const contextSpec = WORLD.getContextSpecOfClass(target.constructor as ContextClassType);
-    // tslint:disable-next-line:no-parameter-reassignment
     options = options ? options : {};
     add(contextSpec, propertyKey, keywords, options);
   };

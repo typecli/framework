@@ -1,7 +1,5 @@
 import { Argument, parseSync, Unparsed } from '../../../../src';
 
-// tslint:disable:member-ordering
-
 class Args {
   @Argument() named!: string;
   @Unparsed(['--'])
