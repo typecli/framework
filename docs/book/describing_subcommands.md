@@ -3,7 +3,7 @@
 WIP: explanation of subcommands
 
 ```ts
-import { Argument, Parsed, Run, Sub, runSync } from '@typecli/framework';
+import { Argument, Run, Sub, runSync } from '@typecli/framework';
 
 class Hello {
   @Argument() face?: string; 
@@ -28,8 +28,8 @@ class Bye {
 class Main {
 }
 
-runSync(new Main(), ['hello', ':)']);
-runSync(new Main(), ['bye', ':(']);
+runSync(Main, ['hello', ':)']);
+runSync(Main, ['bye', ':(']);
 ```
 
 Output:
